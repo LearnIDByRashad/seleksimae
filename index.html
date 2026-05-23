@@ -38,13 +38,7 @@
       margin-bottom: 2rem;
     }
 
-    .shadow-emoji {
-      font-size: 2.2rem;
-      display: inline-block;
-      filter: drop-shadow(0 0 5px #b0b0b0) drop-shadow(0 0 1px #ffffff);
-      margin: 0 4px;
-    }
-
+    /* tanpa emoji di atas MAE SELECTION, hanya teks */
     .header h1 {
       font-size: 2rem;
       letter-spacing: 3px;
@@ -113,7 +107,6 @@
       resize: vertical;
     }
 
-    /* Double marga pilihan */
     .double-option {
       display: flex;
       gap: 25px;
@@ -140,7 +133,6 @@
       accent-color: #7a7a7a;
     }
 
-    /* dua marga besar */
     .mega-marga {
       display: flex;
       flex-direction: row;
@@ -276,11 +268,7 @@
 <body>
 <div class="mae-container">
   <div class="header">
-    <div>
-      <span class="shadow-emoji">⚡</span>
-      <span class="shadow-emoji">🗡️</span>
-      <span class="shadow-emoji">🔥</span>
-    </div>
+    <!-- Emoji di atas MAE SELECTION sudah dihapus total -->
     <h1>✦ MAE SELECTION ✦</h1>
     <div class="sub">「 Official · Collab Battle · Double Bloodline 」</div>
   </div>
@@ -315,10 +303,10 @@
 
   <div class="form-group">
     <label><span class="label-emoji">🏝️</span> 5. Asal Daerah / Domain</label>
-    <input type="text" id="asal" placeholder="Contoh: Kota Phoenix, Lembah Bayangan, Tokyo">
+    <input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah, Jawa Timur">
   </div>
 
-  <!-- Pilihan marga kebesaran (MAE OFFICIAL & MAE COLLAB AND BATTLE) -->
+  <!-- Pilihan marga kebesaran -->
   <div style="margin: 15px 0 5px 0;">
     <label><span class="label-emoji">🏛️</span> Pilih Marga Kebesaran</label>
   </div>
@@ -362,7 +350,6 @@
 
   let selectedMarga = null;
 
-  // Render dua kartu marga
   function renderMargaCards() {
     const container = document.getElementById('margaSelector');
     if (!container) return;
@@ -393,9 +380,7 @@
     }
   }
 
-  // Fungsi utama seleksi
   function executeSeleksi() {
-    // ambil nilai 5 kolom
     const nama = document.getElementById('nama').value.trim();
     const umur = document.getElementById('umur').value.trim();
     const alasan = document.getElementById('alasan').value.trim();
@@ -416,11 +401,9 @@
       return;
     }
 
-    // Siapkan data double marga logic
     let margaAkhir = selectedMarga.nama;
     let doubleDesc = "";
     if (isDouble) {
-      // jika double, gabungkan kedua marga (MAE OFFICIAL + MAE COLLAB AND BATTLE)
       const otherMarga = margaMaster.find(m => m.id !== selectedMarga.id);
       if (otherMarga) {
         margaAkhir = `${selectedMarga.nama} ✦ ${otherMarga.nama}`;
@@ -432,18 +415,15 @@
       doubleDesc = "🎯 Single Marga : murni satu garis kebesaran";
     }
 
-    // alasan jika kosong dikasih default
     const finalAlasan = alasan === "" ? "Ingin membuktikan diri di medan MAE" : alasan;
-    const finalAsal = asal === "" ? "Wilayah tak teridentifikasi" : asal;
+    const finalAsal = asal === "" ? "Jawa Timur" : asal;
     
-    // Update result box
     document.getElementById('resultNama').innerText = nama;
     document.getElementById('resultUmurAsal').innerHTML = `🎂 ${umur} th  |  🌍 ${finalAsal}`;
     document.getElementById('resultMargaDisplay').innerHTML = margaAkhir;
     document.getElementById('resultDoubleStatus').innerHTML = doubleDesc;
     document.getElementById('resultAlasan').innerHTML = `📜 ALASAN MASUK: “${finalAlasan}”`;
     
-    // emblem dengan shadow
     const rawEmblem = selectedMarga.emblem;
     const emblemWithShadow = rawEmblem.split('').map(ch => `<span style="filter: drop-shadow(0 0 6px #aaa); display:inline-block;">${ch}</span>`).join('');
     document.getElementById('embleMarga').innerHTML = emblemWithShadow + " <span style='filter:drop-shadow(0 0 4px silver);'>⚡</span>";
@@ -455,17 +435,14 @@
     resultBox.style.display = "block";
     resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     
-    // efek kilat kecil
     resultBox.style.transform = "scale(1.01)";
     setTimeout(() => { if(resultBox) resultBox.style.transform = ""; }, 250);
   }
 
-  // event & init
   document.getElementById('btnSeleksi').addEventListener('click', executeSeleksi);
   renderMargaCards();
   setDefaultMarga();
 
-  // tekan enter di kolom mana pun (opsional)
   const inputs = document.querySelectorAll('input, textarea');
   inputs.forEach(inp => {
     inp.addEventListener('keypress', (e) => {
