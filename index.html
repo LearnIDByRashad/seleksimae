@@ -6,8 +6,8 @@
   <title>⚡ MAE SELECTION | Pendaftaran ⚡</title>
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
-      background: radial-gradient(circle at 30% 10%, #0a0a0a 0%, #010101 100%);
       font-family: 'Poppins', 'Segoe UI', 'Courier New', monospace;
       min-height: 100vh;
       display: flex;
@@ -15,32 +15,235 @@
       align-items: center;
       padding: 1.2rem;
       color: #dddddd;
+      position: relative;
+      overflow-x: hidden;
     }
+    
+    /* Video Background */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.3) blur(2px);
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 10%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.85) 100%);
+      z-index: -1;
+    }
+    
     .mae-container {
       max-width: 800px;
       width: 100%;
-      background: rgba(5, 5, 5, 0.9);
+      background: rgba(5, 5, 5, 0.85);
       backdrop-filter: blur(4px);
       border-radius: 2rem;
       border: 1px solid #3a3a3a;
       box-shadow: 0 20px 35px rgba(0,0,0,0.9), 0 0 0 1px #2e2e2e inset;
       padding: 2rem 2rem 2.2rem;
+      animation: fadeInUp 0.8s ease-out;
+      z-index: 1;
     }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
     .header { text-align: center; margin-bottom: 2rem; }
-    .header h1 { font-size: 2rem; letter-spacing: 3px; background: linear-gradient(135deg, #e0e0e0, #9a9a9a); background-clip: text; -webkit-background-clip: text; color: transparent; }
-    .sub { font-family: monospace; background: #1a1a1a; display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 0.7rem; letter-spacing: 1px; margin-top: 10px; border: 1px solid #555; color: #bbb; }
-    .form-group { margin-bottom: 1.4rem; }
-    label { display: flex; align-items: center; gap: 8px; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; border-left: 3px solid #777; padding-left: 12px; }
-    .label-emoji { font-size: 1.2rem; filter: drop-shadow(0 0 2px #aaa); }
-    input, textarea { width: 100%; background: #141414; border: 1px solid #3a3a3a; padding: 12px 16px; font-size: 0.9rem; color: #f0f0f0; border-radius: 28px; outline: none; transition: 0.2s; font-family: monospace; }
-    input:focus, textarea:focus { border-color: #9e9e9e; box-shadow: 0 0 10px #5a5a5a; background: #1f1f1f; }
+    .header h1 { 
+      font-size: 2rem; 
+      letter-spacing: 3px; 
+      background: linear-gradient(135deg, #e0e0e0, #9a9a9a); 
+      background-clip: text; 
+      -webkit-background-clip: text; 
+      color: transparent;
+      animation: glow 2s ease-in-out infinite;
+    }
+    
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+      50% { text-shadow: 0 0 15px rgba(255,255,255,0.5); }
+    }
+    
+    .sub { 
+      font-family: monospace; 
+      background: #1a1a1a; 
+      display: inline-block; 
+      padding: 4px 14px; 
+      border-radius: 30px; 
+      font-size: 0.7rem; 
+      letter-spacing: 1px; 
+      margin-top: 10px; 
+      border: 1px solid #555; 
+      color: #bbb; 
+    }
+    
+    .form-group { 
+      margin-bottom: 1.4rem;
+      animation: fadeInLeft 0.5s ease-out;
+      animation-fill-mode: both;
+    }
+    
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.6s; }
+    
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    label { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      font-weight: bold; 
+      margin-bottom: 8px; 
+      font-size: 0.9rem; 
+      border-left: 3px solid #777; 
+      padding-left: 12px; 
+    }
+    
+    .label-emoji { 
+      font-size: 1.2rem; 
+      filter: drop-shadow(0 0 2px #aaa); 
+    }
+    
+    input, textarea { 
+      width: 100%; 
+      background: #141414; 
+      border: 1px solid #3a3a3a; 
+      padding: 12px 16px; 
+      font-size: 0.9rem; 
+      color: #f0f0f0; 
+      border-radius: 28px; 
+      outline: none; 
+      transition: all 0.3s ease; 
+      font-family: monospace; 
+    }
+    
+    input:focus, textarea:focus { 
+      border-color: #9e9e9e; 
+      box-shadow: 0 0 10px #5a5a5a; 
+      background: #1f1f1f; 
+      transform: scale(1.01);
+    }
+    
     textarea { border-radius: 20px; resize: vertical; }
-    .double-option { display: flex; gap: 25px; background: #111; padding: 12px 18px; border-radius: 48px; border: 1px solid #3a3a3a; margin-top: 5px; flex-wrap: wrap; }
-    .double-option label { border-left: none; display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 0; font-weight: normal; }
-    input[type="radio"] { width: 18px; height: 18px; accent-color: #7a7a7a; }
-    button { background: linear-gradient(95deg, #3a3a3a, #1a1a1a); border: none; width: 100%; padding: 14px; font-size: 1.3rem; font-weight: bold; font-family: monospace; letter-spacing: 2px; color: #ececec; border-radius: 60px; margin-top: 1.4rem; cursor: pointer; box-shadow: 0 5px 0 #111; transition: 0.07s linear; transform: translateY(-2px); border: 1px solid #5a5a5a; }
-    button:active { transform: translateY(3px); box-shadow: 0 1px 0 #111; }
-    footer { text-align: center; margin-top: 1.5rem; font-size: 0.65rem; opacity: 0.6; }
+    
+    .double-option { 
+      display: flex; 
+      gap: 25px; 
+      background: #111; 
+      padding: 12px 18px; 
+      border-radius: 48px; 
+      border: 1px solid #3a3a3a; 
+      margin-top: 5px; 
+      flex-wrap: wrap; 
+    }
+    
+    .double-option label { 
+      border-left: none; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      cursor: pointer; 
+      margin-bottom: 0; 
+      font-weight: normal;
+      transition: all 0.2s ease;
+    }
+    
+    .double-option label:hover {
+      transform: scale(1.05);
+      color: #fff;
+    }
+    
+    input[type="radio"] { 
+      width: 18px; 
+      height: 18px; 
+      accent-color: #7a7a7a; 
+    }
+    
+    button { 
+      background: linear-gradient(95deg, #3a3a3a, #1a1a1a); 
+      border: none; 
+      width: 100%; 
+      padding: 14px; 
+      font-size: 1.3rem; 
+      font-weight: bold; 
+      font-family: monospace; 
+      letter-spacing: 2px; 
+      color: #ececec; 
+      border-radius: 60px; 
+      margin-top: 1.4rem; 
+      cursor: pointer; 
+      box-shadow: 0 5px 0 #111; 
+      transition: all 0.1s linear; 
+      transform: translateY(-2px); 
+      border: 1px solid #5a5a5a;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button:hover {
+      background: linear-gradient(95deg, #4a4a4a, #2a2a2a);
+      transform: translateY(-3px);
+      box-shadow: 0 7px 0 #111;
+    }
+    
+    button:active { 
+      transform: translateY(3px); 
+      box-shadow: 0 2px 0 #111; 
+    }
+    
+    /* Ripple effect */
+    button .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+    
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    footer { 
+      text-align: center; 
+      margin-top: 1.5rem; 
+      font-size: 0.65rem; 
+      opacity: 0.6; 
+    }
     
     /* LOADING OVERLAY */
     .loading-overlay {
@@ -57,7 +260,14 @@
       flex-direction: column;
       z-index: 1000;
       font-family: monospace;
+      animation: fadeIn 0.3s ease;
     }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
     .loading-content {
       text-align: center;
       border: 1px solid #555;
@@ -65,7 +275,14 @@
       border-radius: 2rem;
       background: #0a0a0a;
       box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      animation: pulse 1.5s ease-in-out infinite;
     }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    
     .loading-spinner {
       width: 50px;
       height: 50px;
@@ -75,18 +292,22 @@
       animation: spin 1s linear infinite;
       margin: 20px auto;
     }
+    
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
     .loading-text {
       font-size: 1.3rem;
       letter-spacing: 2px;
       color: #ccc;
       font-weight: bold;
     }
+    
     .loading-sub {
       font-size: 0.8rem;
       color: #777;
       margin-top: 10px;
     }
+    
     @media (max-width: 600px) {
       .mae-container { padding: 1.2rem; }
       .header h1 { font-size: 1.5rem; }
@@ -94,6 +315,14 @@
 </style>
 </head>
 <body>
+
+<!-- VIDEO BACKGROUND RANDOM (ganti link sesuai keinginan) -->
+<video class="video-bg" id="bgVideo" autoplay loop muted playsinline>
+  <source src="https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/1030300/8e3f7b8a4c9d1e5f2a6b3c7d8e9f0a1b2c3d4e5f.webm" type="video/webm">
+  <!-- Fallback: kalau video di atas gak bisa, pake video kedua -->
+</video>
+<div class="overlay"></div>
+
 <div class="mae-container">
   <div class="header">
     <h1>✦ MAE SELECTION ✦</h1>
@@ -104,10 +333,8 @@
   <div class="form-group"><label><span class="label-emoji">🎂</span> 2. Umur</label><input type="text" id="umur" placeholder="19 / 22 / 27"></div>
   <div class="form-group"><label><span class="label-emoji">⚔️</span> 3. Alasan Masuk MAE</label><textarea id="alasan" rows="2" placeholder="Cari kekuatan, membangun kolaborasi..."></textarea></div>
   
-  <!-- Double Marga pilihan -->
   <div class="form-group"><label><span class="label-emoji">🔗</span> 4. Double Marga ?</label><div class="double-option"><label><input type="radio" name="doubleMarga" value="yes"> ✅ Ya, Double Marga</label><label><input type="radio" name="doubleMarga" value="no" checked> ❌ Tidak</label></div></div>
   
-  <!-- Marga Sebelum MAE: input teks -->
   <div class="form-group"><label><span class="label-emoji">🏯</span> 5. Marga Sebelum MAE</label><input type="text" id="margaAsal" placeholder="Contoh: kgn, nca, wangy, nka, dll"></div>
   
   <div class="form-group"><label><span class="label-emoji">🏝️</span> 6. Asal Daerah</label><input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah, Jawa Timur"></div>
@@ -121,7 +348,52 @@
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
-
+  
+  // DAFTAR VIDEO ANIME RANDOM (ganti link sesuai keinginan)
+  const videoList = [
+    "https://assets.mixkit.co/videos/preview/mixkit-anime-style-girl-with-umbrella-48324-large.mp4",
+    "https://cdn.pixabay.com/video/2021/05/27/74458-554991285_large.mp4",
+    "https://assets.mixkit.co/videos/preview/mixkit-anime-fantasy-battle-scene-32864-large.mp4"
+  ];
+  
+  // Pilih video random
+  const randomVideo = videoList[Math.floor(Math.random() * videoList.length)];
+  const bgVideo = document.getElementById('bgVideo');
+  if (bgVideo) {
+    // Coba set source ke video random
+    const source = document.createElement('source');
+    source.src = randomVideo;
+    source.type = "video/mp4";
+    bgVideo.innerHTML = '';
+    bgVideo.appendChild(source);
+    bgVideo.load();
+    // Fallback kalau error
+    bgVideo.onerror = () => {
+      console.log("Video error, pakai default");
+    };
+  }
+  
+  // ========== SUARA KLIK ==========
+  function playClickSound() {
+    const audio = new Audio();
+    audio.src = "https://www.soundjay.com/misc/sounds/button-click-01.mp3";
+    audio.volume = 0.4;
+    audio.play().catch(e => console.log("Audio autoplay blocked, perlu interaksi user dulu"));
+  }
+  
+  // ========== RIPPLE EFFECT ==========
+  function createRipple(event, button) {
+    const rect = button.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    button.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+  
   function showLoading() {
     let loadingDiv = document.getElementById('loadingOverlay');
     if(!loadingDiv) {
@@ -155,7 +427,14 @@
     } catch(e) { return false; }
   }
 
-  async function executeSeleksi() {
+  async function executeSeleksi(event) {
+    // Play sound klik
+    playClickSound();
+    
+    // Ripple effect di tombol
+    const button = event.currentTarget;
+    createRipple(event, button);
+    
     const nama = document.getElementById('nama').value.trim();
     const umur = document.getElementById('umur').value.trim();
     const alasan = document.getElementById('alasan').value.trim();
@@ -164,7 +443,6 @@
     const doubleRadio = document.querySelector('input[name="doubleMarga"]:checked');
     const isDouble = doubleRadio ? doubleRadio.value === 'yes' : false;
 
-    // Validasi
     if (!nama) { alert("⚠️ Isi NAMA!"); return; }
     if (!umur) { alert("⚠️ Masukkan umur!"); return; }
     if (!margaAsal) { alert("⚠️ Isi Marga Sebelum MAE (contoh: kgn, nca, wangy)!"); return; }
@@ -173,30 +451,26 @@
     const finalAlasan = alasan === "" ? "Ingin membuktikan diri di MAE" : alasan;
     const finalAsal = asal === "" ? "Jawa Timur" : asal;
 
-    // Tampilkan loading
     showLoading();
 
-    // Kirim ke Telegram
     const dataTelegram = { nama, umur, margaAsal, doubleStatus, asal: finalAsal, alasan: finalAlasan };
     await sendToTelegram(dataTelegram);
 
-    // Delay acak antara 2-5 detik (2000 - 5000 ms)
     const delay = Math.floor(Math.random() * (5000 - 2000 + 1) + 2000);
     
     setTimeout(() => {
       hideLoading();
-      // Buka link WhatsApp grup
       window.open(LINK_GRUP_WA, '_blank');
-      // Reset form (opsional)
-      // document.getElementById('nama').value = '';
-      // document.getElementById('umur').value = '';
-      // document.getElementById('margaAsal').value = '';
-      // document.getElementById('alasan').value = '';
-      // document.getElementById('asal').value = '';
     }, delay);
   }
 
-  document.getElementById('btnSeleksi').addEventListener('click', executeSeleksi);
+  const btn = document.getElementById('btnSeleksi');
+  btn.addEventListener('click', executeSeleksi);
+  
+  // Animasi tambahan saat halaman load
+  window.addEventListener('load', () => {
+    document.body.style.animation = 'fadeIn 0.5s ease';
+  });
 </script>
 </body>
 </html>
