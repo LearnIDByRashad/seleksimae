@@ -118,7 +118,6 @@
       margin-bottom: 8px; 
       font-size: 0.9rem; 
       padding-left: 5px;
-      /* border-left: 3px solid #777;  <-- GARIS INI DIHAPUS ! */
     }
     
     label i {
@@ -220,10 +219,6 @@
     button:active { 
       transform: translateY(3px); 
       box-shadow: 0 2px 0 #111; 
-    }
-    
-    button i {
-      margin-right: 8px;
     }
     
     /* Ripple effect */
@@ -335,7 +330,7 @@
 
 <div class="mae-container">
   <div class="header">
-    <h1><i class="fas fa-skull"></i> ✦ MAE SELECTION ✦ <i class="fas fa-dragon"></i></h1>
+    <h1><i class="fas fa-dragon"></i> ✦ MAE SELECTION ✦ <i class="fas fa-dragon"></i></h1>
     <div class="sub"><i class="fas fa-bolt"></i> Daftar Sekarang · Battle Royale <i class="fas fa-bolt"></i></div>
   </div>
 
@@ -372,7 +367,7 @@
     <input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah, Jawa Timur">
   </div>
 
-  <button id="btnSeleksi"><i class="fas fa-skull-crossbones"></i> DAFTAR SEKARANG <i class="fas fa-skull-crossbones"></i></button>
+  <button id="btnSeleksi">DAFTAR SEKARANG</button>
   
   <footer>
     <i class="fas fa-shield-alt"></i> MAE SELECTION SYSTEM | battle ready <i class="fas fa-shield-alt"></i>
@@ -385,17 +380,26 @@
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
-  // ========== AUDIO BACKGROUND ==========
+  // ========== AUDIO BACKGROUND AUTO PLAY ==========
   const bgAudio = document.getElementById('bgAudio');
   let musicStarted = false;
   
-  function startMusicIfNeeded() {
+  // Fungsi buat play audio otomatis (harus karena interaksi user)
+  function autoPlayMusic() {
     if(!musicStarted && bgAudio) {
       bgAudio.volume = 0.3;
-      bgAudio.play().catch(e => console.log("Audio play error:", e));
-      musicStarted = true;
+      bgAudio.play().then(() => {
+        musicStarted = true;
+        console.log("Musik background nyala");
+      }).catch(e => console.log("Auto play ditolak browser:", e));
     }
   }
+  
+  // Coba play saat halaman di-load (mungkin gagal kena blokir)
+  document.addEventListener('click', function onClick() {
+    autoPlayMusic();
+    document.removeEventListener('click', onClick);
+  }, { once: true });
   
   // ========== SUARA KLIK ==========
   function playClickSound() {
@@ -464,7 +468,7 @@
 
   async function executeSeleksi(event) {
     playClickSound();
-    startMusicIfNeeded();
+    autoPlayMusic(); // nyalain musik juga pas klik daftar
     
     const button = event.currentTarget;
     createRipple(event, button);
