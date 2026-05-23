@@ -23,7 +23,6 @@
       overflow-x: hidden;
     }
     
-    /* Video Background dari file video.mp4 */
     .video-bg {
       position: fixed;
       top: 0;
@@ -221,7 +220,6 @@
       box-shadow: 0 2px 0 #111; 
     }
     
-    /* Ripple effect */
     button .ripple {
       position: absolute;
       border-radius: 50%;
@@ -246,7 +244,6 @@
       margin: 0 4px;
     }
     
-    /* LOADING OVERLAY */
     .loading-overlay {
       position: fixed;
       top: 0;
@@ -260,7 +257,6 @@
       align-items: center;
       flex-direction: column;
       z-index: 1000;
-      font-family: monospace;
       animation: fadeIn 0.3s ease;
     }
     
@@ -317,13 +313,13 @@
 </head>
 <body>
 
-<!-- Video Background dari file video.mp4 -->
+<!-- Video Background -->
 <video class="video-bg" autoplay loop muted playsinline>
   <source src="video.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-<!-- Audio Background dari file audio.m4a -->
+<!-- Audio Background -->
 <audio id="bgAudio" src="audio.m4a" loop preload="auto"></audio>
 
 <div class="overlay"></div>
@@ -331,7 +327,7 @@
 <div class="mae-container">
   <div class="header">
     <h1><i class="fas fa-dragon"></i> ✦ MAE SELECTION ✦ <i class="fas fa-dragon"></i></h1>
-    <div class="sub"><i class="fas fa-bolt"></i> Daftar Sekarang · Battle Royale <i class="fas fa-bolt"></i></div>
+    <div class="sub"><i class="fas fa-bolt"></i> Daftar Sekarang <i class="fas fa-bolt"></i></div>
   </div>
 
   <div class="form-group">
@@ -375,33 +371,27 @@
 </div>
 
 <script>
-  // ========== KONFIGURASI ==========
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
-  // ========== AUDIO BACKGROUND AUTO PLAY ==========
   const bgAudio = document.getElementById('bgAudio');
   let musicStarted = false;
   
-  // Fungsi buat play audio otomatis (harus karena interaksi user)
   function autoPlayMusic() {
     if(!musicStarted && bgAudio) {
       bgAudio.volume = 0.3;
       bgAudio.play().then(() => {
         musicStarted = true;
-        console.log("Musik background nyala");
       }).catch(e => console.log("Auto play ditolak browser:", e));
     }
   }
   
-  // Coba play saat halaman di-load (mungkin gagal kena blokir)
   document.addEventListener('click', function onClick() {
     autoPlayMusic();
     document.removeEventListener('click', onClick);
   }, { once: true });
   
-  // ========== SUARA KLIK ==========
   function playClickSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -415,12 +405,9 @@
       gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
       oscillator.stop(audioCtx.currentTime + 0.3);
       audioCtx.resume();
-    } catch(e) {
-      console.log("Web Audio API error:", e);
-    }
+    } catch(e) {}
   }
   
-  // ========== RIPPLE EFFECT ==========
   function createRipple(event, button) {
     const rect = button.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -458,7 +445,6 @@
 
   async function sendToTelegram(data) {
     const pesan = `🔥 MAE SELECTION 🔥\n\n👤 Nama: ${data.nama}\n🎂 Umur: ${data.umur}\n🏯 Marga Sebelum MAE: ${data.margaAsal}\n🔗 Double Marga: ${data.doubleStatus}\n🌍 Asal: ${data.asal}\n📜 Alasan: ${data.alasan}`;
-    
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
     try {
       const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: CHAT_ID, text: pesan }) });
@@ -468,7 +454,7 @@
 
   async function executeSeleksi(event) {
     playClickSound();
-    autoPlayMusic(); // nyalain musik juga pas klik daftar
+    autoPlayMusic();
     
     const button = event.currentTarget;
     createRipple(event, button);
