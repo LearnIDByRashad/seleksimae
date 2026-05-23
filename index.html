@@ -3,346 +3,378 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>👑 Royal Marga Selection | Bangkitkan Nama Besarmu</title>
+  <title>⚔️ MAE SELECTION | Royal Anime Battle ⚔️</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none; /* slight royal feel, text can be selected though */
     }
 
     body {
-      background: radial-gradient(circle at 10% 20%, #0a0705 0%, #010101 100%);
-      font-family: 'Cinema', 'Georgia', 'Times New Roman', serif;
+      background: radial-gradient(ellipse at 20% 30%, #0a0804 0%, #020202 100%);
+      font-family: 'Segoe UI', 'Poppins', 'Cinema', 'Georgia', monospace;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1.5rem;
-      color: #eedd99;
+      padding: 1.2rem;
+      color: #f5e2b0;
     }
 
-    /* royal gold & dark container */
+    /* royal container with battle scars */
     .royal-container {
-      max-width: 760px;
+      max-width: 800px;
       width: 100%;
-      background: rgba(10, 8, 5, 0.75);
-      backdrop-filter: blur(2px);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
       border-radius: 3rem 2rem 3rem 2rem;
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      box-shadow: 0 25px 45px rgba(0,0,0,0.7), 0 0 0 2px rgba(212, 175, 55, 0.2) inset, 0 0 20px rgba(255, 215, 0, 0.2);
-      padding: 2rem 2rem 2.5rem;
-      transition: all 0.3s;
+      border: 1px solid rgba(218, 165, 32, 0.7);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 2px rgba(255, 193, 37, 0.3) inset, 0 0 30px rgba(255, 200, 50, 0.2);
+      padding: 2rem 2rem 2rem;
+      transition: 0.3s;
     }
 
-    /* header crown */
     .crown-header {
       text-align: center;
-      margin-bottom: 1.8rem;
-      position: relative;
+      margin-bottom: 2rem;
     }
+
+    /* shadow emoji style (border/glow effect) */
+    .shadow-emoji {
+      font-size: 2.6rem;
+      display: inline-block;
+      filter: drop-shadow(0 0 6px #ffcc44) drop-shadow(0 0 2px #f0a500);
+      text-shadow: 0 0 4px rgba(0,0,0,0.5);
+      margin: 0 6px;
+    }
+
     .crown-header h1 {
-      font-size: 2.2rem;
-      letter-spacing: 4px;
-      background: linear-gradient(135deg, #e9c468 0%, #b58b2f 100%);
+      font-size: 2rem;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ffdf8c, #c9921f);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      text-shadow: 0 0 8px rgba(0,0,0,0.5);
-      display: inline-block;
-      border-bottom: 2px solid #cd9f3c;
-      padding-bottom: 8px;
-    }
-    .crown-icon {
-      font-size: 2.8rem;
-      filter: drop-shadow(0 0 4px gold);
-      margin-bottom: 6px;
+      text-shadow: 0 0 8px rgba(0,0,0,0.3);
     }
     .sub {
       font-family: monospace;
+      background: #1e1a0e80;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.75rem;
       letter-spacing: 2px;
-      color: #c9aa4b;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      margin-top: 8px;
+      margin-top: 10px;
+      border: 1px solid #e7bc5e;
     }
 
-    /* form styling */
+    /* form */
     .form-group {
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.8rem;
     }
     label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 8px;
-      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      border-left: 4px solid #edb33c;
+      padding-left: 14px;
       letter-spacing: 1px;
-      color: #f3e1a0;
-      border-left: 3px solid #e4b641;
-      padding-left: 12px;
+    }
+    label .shadow-emoji-small {
+      font-size: 1.3rem;
+      filter: drop-shadow(0 0 3px #f5bc4e);
     }
     input, select {
       width: 100%;
-      background: #1e1b16;
-      border: 1px solid #5f4a28;
+      background: #18140e;
+      border: 1px solid #6e531f;
       padding: 14px 18px;
       font-size: 1rem;
-      font-family: 'Segoe UI', 'Georgia', serif;
-      color: #f7eac5;
-      border-radius: 28px;
+      color: #ffe6b3;
+      border-radius: 40px;
       outline: none;
-      transition: all 0.25s ease;
-      box-shadow: inset 0 1px 3px #00000033;
+      transition: 0.2s;
+      font-family: monospace;
+      font-weight: bold;
     }
     input:focus, select:focus {
-      border-color: #e6bc6e;
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5), inset 0 0 2px #ffdfa0;
-      background: #2a241c;
+      border-color: #f7cf6a;
+      box-shadow: 0 0 14px #e6b13e, inset 0 0 4px #ffd58c;
+      background: #262017;
     }
-    /* daftar marga khusus dark royal */
-    .marga-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 12px;
-      margin-top: 12px;
-      max-height: 210px;
-      overflow-y: auto;
-      padding: 6px 4px;
-      background: rgba(0,0,0,0.45);
-      border-radius: 24px;
-      border: 1px solid #55421f;
+
+    /* marga card selection - dua marga besar */
+    .mega-marga {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      margin: 20px 0 10px;
+      flex-wrap: wrap;
     }
-    .marga-option {
-      background: #130f0b;
-      padding: 8px 12px;
-      border-radius: 32px;
+    .marga-card {
+      flex: 1;
+      background: rgba(0,0,0,0.6);
+      border-radius: 28px;
+      padding: 1.2rem 0.8rem;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #3a2d18;
-      font-weight: 500;
-      color: #efda9b;
+      border: 1px solid #9e7b3a;
+      transition: 0.25s;
+      backdrop-filter: blur(5px);
     }
-    .marga-option:hover {
-      background: #2c241b;
-      border-color: #e4b03b;
-      transform: scale(0.97);
-      box-shadow: 0 0 8px #c7962e;
+    .marga-card:hover {
+      transform: translateY(-5px);
+      border-color: #f7c45a;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
-    .selected-marga {
-      background: linear-gradient(145deg, #3f2d12, #241d0e);
-      border-color: #eec153;
-      color: #ffefb9;
-      text-shadow: 0 0 2px black;
-      box-shadow: 0 0 6px #f5bc4e;
+    .selected-marga-card {
+      background: radial-gradient(circle at 30% 10%, #352b18, #17120b);
+      border: 2px solid #f3c56b;
+      box-shadow: 0 0 15px #ffbe3c;
     }
+    .marga-emoji {
+      font-size: 3rem;
+      filter: drop-shadow(0 0 8px #ffbb44) drop-shadow(0 0 2px gold);
+      margin-bottom: 8px;
+    }
+    .marga-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ffdc97, #e2a526);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .marga-desc {
+      font-size: 0.75rem;
+      color: #dbbc7a;
+      margin-top: 6px;
+    }
+
+    /* battle button */
     button {
-      background: radial-gradient(circle at 30% 10%, #c9a247, #8a6529);
+      background: linear-gradient(95deg, #b47c2e, #734d18);
       border: none;
       width: 100%;
       padding: 14px;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: bold;
-      font-family: 'Cinema', 'Georgia', serif;
-      letter-spacing: 2px;
-      color: #1f1a0c;
+      font-family: monospace;
+      letter-spacing: 3px;
+      color: #0f0b04;
       border-radius: 60px;
       margin-top: 1rem;
       cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 6px 0 #4f3a18;
+      box-shadow: 0 6px 0 #3f2c0e;
+      transition: 0.07s linear;
       transform: translateY(-2px);
     }
     button:active {
       transform: translateY(4px);
-      box-shadow: 0 2px 0 #4f3a18;
+      box-shadow: 0 2px 0 #3f2c0e;
     }
+
+    /* result section */
     .result-card {
       margin-top: 2rem;
-      background: #0c0a08c9;
+      background: #0c0906c4;
       border-radius: 2rem;
-      padding: 1.4rem;
-      border: 1px solid #dbb259;
+      padding: 1.6rem;
+      border: 1px solid #efbc55;
       text-align: center;
-      transition: all 0.4s;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
     }
     .royal-name {
       font-size: 2.2rem;
       font-weight: bold;
-      background: linear-gradient(135deg, #fad974, #ca9622);
+      background: linear-gradient(135deg, #f7e05e, #d79217);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      text-transform: uppercase;
-      letter-spacing: 3px;
     }
-    .badge-lambang {
-      font-size: 2.2rem;
+    .battle-emblem {
+      font-size: 3rem;
+      filter: drop-shadow(0 0 10px #ffbc40) drop-shadow(0 0 3px #ff8c00);
       margin: 12px 0;
     }
-    .desc {
-      font-size: 0.9rem;
-      color: #eeddbb;
-      border-top: 1px dashed #b48b3a;
+    .slogan-area {
+      font-size: 1rem;
+      font-style: italic;
+      border-top: 1px dashed #cf9f44;
       padding-top: 12px;
-      margin-top: 12px;
+      margin-top: 10px;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
     }
     footer {
       text-align: center;
-      margin-top: 1.5rem;
+      margin-top: 1.8rem;
       font-size: 0.7rem;
-      opacity: 0.6;
-      font-family: monospace;
+      opacity: 0.7;
     }
-    hr {
-      border-color: #b47c2e33;
-      margin: 8px 0;
-    }
-    @media (max-width: 540px) {
-      .royal-container { padding: 1.3rem; }
-      .crown-header h1 { font-size: 1.4rem; }
+
+    @media (max-width: 550px) {
+      .mega-marga { flex-direction: column; }
+      .royal-container { padding: 1.2rem; }
       .royal-name { font-size: 1.5rem; }
-    }
-    /* scrollbar mewah */
-    .marga-list::-webkit-scrollbar {
-      width: 5px;
-    }
-    .marga-list::-webkit-scrollbar-track {
-      background: #2f261a;
-      border-radius: 10px;
-    }
-    .marga-list::-webkit-scrollbar-thumb {
-      background: #e6b650;
-      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 <div class="royal-container">
   <div class="crown-header">
-    <div class="crown-icon">👑⚜️</div>
-    <h1>✦ SELEKSI MARGA ROYAL ✦</h1>
-    <div class="sub">Pilih darah bangsawan — warisan kehormatan</div>
-  </div>
-
-  <div class="form-group">
-    <label>🪶 Nama Lengkap (Putra/Putri Bangsawan)</label>
-    <input type="text" id="namaUser" placeholder="Contoh: Raden Arya Wibisana" autocomplete="off">
-  </div>
-
-  <div class="form-group">
-    <label>🏰 Pilih Marga Kebesaran</label>
-    <div class="marga-list" id="margaListContainer">
-      <!-- isi dari javascript -->
+    <div>
+      <span class="shadow-emoji">⚔️</span>
+      <span class="shadow-emoji">👑</span>
+      <span class="shadow-emoji">🔥</span>
     </div>
+    <h1>✦ MAE ROYAL SELECTION ✦</h1>
+    <div class="sub">「 anime bloodline • two great houses 」</div>
   </div>
 
-  <button id="btnSeleksi">⚔️ LAKONI SELEKSI ⚔️</button>
+  <div class="form-group">
+    <label>
+      <span class="shadow-emoji-small">✨</span> SLOGAN / IDENTITY
+    </label>
+    <input type="text" id="sloganInput" placeholder="contoh: The Phantom Flame • Silent Storm • Eternal Vanguard" autocomplete="off">
+  </div>
+
+  <div style="margin: 10px 0 8px 0;">
+    <label><span class="shadow-emoji-small">🏰</span> PILIH MARGA KEBESARAN (DUAL MASTER)</label>
+  </div>
+  <div class="mega-marga" id="margaSelector">
+    <!-- dua marga utama: MAE OFFICIAL dan MAE COLLAB AND BATTLE -->
+  </div>
+
+  <button id="btnSeleksi">⚡ LAKUKAN SELEKSI & BATTLE ⚡</button>
 
   <div class="result-card" id="resultBox" style="display: none;">
-    <div class="badge-lambang" id="lambangMarga">🛡️</div>
-    <div class="royal-name" id="resultMarga">-</div>
-    <div class="desc" id="deskripsiMarga">Keluarga agung yang penuh kharisma dan pengaruh.</div>
-    <hr>
-    <div style="font-size: 0.85rem; margin-top: 6px;">atas nama <span id="resultNama" style="font-weight: bold; color: #fad161;">—</span></div>
+    <div class="battle-emblem" id="embleMarga">🏅</div>
+    <div class="royal-name" id="resultMargaDisplay">-</div>
+    <div class="slogan-area" id="resultSlogan">"Slogan ksatria"</div>
+    <div id="deskripsiBattle" style="margin-top: 12px; font-size:0.85rem; color:#efcd85;">——— kekuatan absolute ———</div>
   </div>
-  <footer>⚜️ Kementerian Pusaka Nusantara | Royal Edition ⚜️</footer>
+  <footer>⚔️ Klan MAE • Dua jalur kebesaran: Official & Collab Battle ⚔️</footer>
 </div>
 
 <script>
-  // kumpulan marga kerajaan dengan aura gelap & royal (campuran nusantara, fiksi istana)
-  const margaData = [
-    { nama: "Brawijaya", lambang: "🐉⚔️", deskripsi: "Keturunan Pendekar Langit, pembawa badai dan kedaulatan. Singgasana penuh wibawa." },
-    { nama: "Darmakusuma", lambang: "🌙🐅", deskripsi: "Kesatria malam dengan darah biru, pelindung ajaran sakti." },
-    { nama: "Wijayakusuma", lambang: "🌸🏹", deskripsi: "Marga bunga abadi, bijaksana dan piawai dalam diplomasi." },
-    { nama: "Suryanegara", lambang: "☀️🦅", deskripsi: "Putra matahari, keberanian tak tergoyahkan, penakluk gelombang." },
-    { nama: "Nagapati", lambang: "🐍👑", deskripsi: "Penguasa naga bumi, mistis & ditakuti, setia pada mahkota." },
-    { nama: "Kertabumi", lambang: "⛰️🌿", deskripsi: "Penjaga tanah subur, marga yang royal dan dermawan." },
-    { nama: "Candradewa", lambang: "🌕🕊️", deskripsi: "Dinasti bulan purnama, penuh seni dan ilmu kebijaksanaan." },
-    { nama: "Alamsyah", lambang: "📜✒️", deskripsi: "Pencatat sejarah kerajaan, darah intelektual & berwibawa." }
+  // DATA DUA MARGA BESAR dengan aura anime / battle
+  const margaMaster = [
+    {
+      id: "official",
+      nama: "MAE OFFICIAL",
+      title: "MAE OFFICIAL",
+      emblem: "⚜️🔱",
+      descBattle: "Klan murni pembawa perintah kerajaan. Panglima sejati, darah biru absolut, penguasa tatanan dan takhta.",
+      sloganTambah: "Official Destiny — Unbreakable Oath",
+      bgEffect: "Royal Aura of Order"
+    },
+    {
+      id: "collab",
+      nama: "MAE COLLAB AND BATTLE",
+      title: "MAE COLLAB ⚔️ BATTLE",
+      emblem: "🤝⚡",
+      descBattle: "Persekutuan para petarung lintas alam, kolaborasi legendaris. Jiwa kebersamaan dan kekuatan destruktif.",
+      sloganTambah: "United We Strike — Battle Symphony",
+      bgEffect: "Collab Storm"
+    }
   ];
 
-  let selectedMargaObj = null;
+  let selectedMarga = null;  // simpan objek terpilih
 
-  function renderMargaList() {
-    const container = document.getElementById('margaListContainer');
-    if(!container) return;
+  // render dua kartu marga dengan shadow emoji & border keren
+  function renderMargaCards() {
+    const container = document.getElementById('margaSelector');
+    if (!container) return;
     container.innerHTML = '';
-    margaData.forEach((m, idx) => {
-      const div = document.createElement('div');
-      div.className = 'marga-option';
-      if(selectedMargaObj && selectedMargaObj.nama === m.nama) div.classList.add('selected-marga');
-      div.innerHTML = `${m.lambang} ${m.nama}`;
-      div.onclick = () => {
-        // pilih marga
-        selectedMargaObj = m;
-        // update style semua
-        document.querySelectorAll('.marga-option').forEach(opt => opt.classList.remove('selected-marga'));
-        div.classList.add('selected-marga');
+    margaMaster.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'marga-card';
+      if (selectedMarga && selectedMarga.id === m.id) card.classList.add('selected-marga-card');
+      
+      // inner dengan shadow-emoji pada emblem
+      card.innerHTML = `
+        <div class="marga-emoji">${m.emblem.split('').map(ch => `<span style="filter: drop-shadow(0 0 5px #f7bc45); display:inline-block;">${ch}</span>`).join('')}</div>
+        <div class="marga-title">${m.title}</div>
+        <div class="marga-desc">${m.descBattle.substring(0, 60)}...</div>
+      `;
+      card.onclick = () => {
+        selectedMarga = m;
+        // update semua card highlight
+        document.querySelectorAll('.marga-card').forEach(c => c.classList.remove('selected-marga-card'));
+        card.classList.add('selected-marga-card');
       };
-      container.appendChild(div);
+      container.appendChild(card);
     });
   }
 
-  // event seleksi
-  function executeSeleksi() {
-    const namaInput = document.getElementById('namaUser').value.trim();
-    const resultBox = document.getElementById('resultBox');
-    const resultMargaSpan = document.getElementById('resultMarga');
-    const resultNamaSpan = document.getElementById('resultNama');
-    const lambangSpan = document.getElementById('lambangMarga');
-    const deskripsiSpan = document.getElementById('deskripsiMarga');
-
-    if(!namaInput) {
-      alert("⚠️ Isi dahulu nama bangsawan sebelum seleksi!");
-      return;
-    }
-
-    if(!selectedMargaObj) {
-      alert("👑 Pilih satu marga kebesaran dari daftar kerajaan!");
-      return;
-    }
-
-    // royal effect: nama depan diberi gelar opsional (tambah gelar jika belum)
-    let finalName = namaInput;
-    // supaya lebih royal, jika tidak ada gelar tambah 'Bagus' atau 'Raden' secara halus? tapi biarkan asli user
-    // namun lebih keren: tampilkan dengan gelar kehormatan di result.
-    const gelarKehormatan = "Yang Mulia";
-    const tampilanNama = `${gelarKehormatan} ${finalName}`;
-
-    resultNamaSpan.innerText = tampilanNama;
-    resultMargaSpan.innerText = selectedMargaObj.nama;
-    lambangSpan.innerHTML = selectedMargaObj.lambang + " ⚜️";
-    deskripsiSpan.innerHTML = selectedMargaObj.deskripsi + " — Darah agung yang diakui seantero jagad.";
-
-    resultBox.style.display = "block";
-    // efek smooth scroll
-    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    // tambahkan efek kilau kecil
-    resultBox.style.transform = "scale(1.01)";
-    setTimeout(() => { if(resultBox) resultBox.style.transform = ""; }, 400);
-  }
-
-  // set default selected pertama agar user friendly (opsional)
+  // set default pilih MAE OFFICIAL agar mudah
   function setDefaultMarga() {
-    if(margaData.length > 0 && !selectedMargaObj) {
-      selectedMargaObj = margaData[0];
-      renderMargaList(); // refresh untuk highlight
+    if (!selectedMarga && margaMaster.length) {
+      selectedMarga = margaMaster[0];
+      renderMargaCards();
     }
   }
 
-  // event listener
-  document.getElementById('btnSeleksi').addEventListener('click', executeSeleksi);
-  // inisialisasi daftar
-  renderMargaList();
-  setDefaultMarga();
+  // proses seleksi
+  function executeSeleksi() {
+    const sloganValue = document.getElementById('sloganInput').value.trim();
+    const resultBox = document.getElementById('resultBox');
+    const resultMargaSpan = document.getElementById('resultMargaDisplay');
+    const emblemSpan = document.getElementById('embleMarga');
+    const descBattleSpan = document.getElementById('deskripsiBattle');
+    const sloganArea = document.getElementById('resultSlogan');
 
-  // optional: tekan enter di input nama
-  document.getElementById('namaUser').addEventListener('keypress', function(e) {
+    if (!selectedMarga) {
+      alert("⚠️ Pilih salah satu Marga Kebesaran: MAE OFFICIAL atau MAE COLLAB AND BATTLE !");
+      return;
+    }
+
+    let finalSlogan = sloganValue;
+    if (finalSlogan === "") {
+      finalSlogan = "「 The Unnamed Phantom · Shadow of Dawn 」";
+    }
+
+    // Membuat tampilan slogan super keren
+    const formattedSlogan = `“ ${finalSlogan.toUpperCase()} ”`;
+    
+    // set hasil sesuai marga
+    resultMargaSpan.innerText = selectedMarga.nama;
+    
+    // buat emblem dengan shadow emoji glow effect
+    const rawEmblem = selectedMarga.emblem;
+    const emblemWithShadow = rawEmblem.split('').map(ch => `<span style="filter: drop-shadow(0 0 6px #ffbc42); display:inline-block; margin:0 2px;">${ch}</span>`).join('');
+    emblemSpan.innerHTML = emblemWithShadow + " <span style='filter: drop-shadow(0 0 4px gold);'>⭐</span>";
+    
+    let extraDesc = `${selectedMarga.descBattle} <br> ✦ ${selectedMarga.sloganTambah} ✦`;
+    descBattleSpan.innerHTML = extraDesc;
+    sloganArea.innerHTML = formattedSlogan;
+    
+    // efek tampilan result
+    resultBox.style.display = "block";
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    // animasi small shake glory
+    resultBox.style.transform = "scale(1.02)";
+    setTimeout(() => { if(resultBox) resultBox.style.transform = ""; }, 300);
+  }
+
+  // event listener tombol
+  document.getElementById('btnSeleksi').addEventListener('click', executeSeleksi);
+  
+  // handle enter pada slogan
+  document.getElementById('sloganInput').addEventListener('keypress', (e) => {
     if(e.key === 'Enter') executeSeleksi();
   });
+  
+  // inisiasi
+  renderMargaCards();
+  setDefaultMarga();
 </script>
 </body>
 </html>
