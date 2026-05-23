@@ -23,7 +23,6 @@
       overflow-x: hidden;
     }
     
-    /* Video Background */
     .video-bg {
       position: fixed;
       top: 0;
@@ -45,7 +44,7 @@
       z-index: -1;
     }
     
-    /* SPLASH SCREEN / LOADING AWAL */
+    /* SPLASH SCREEN */
     .splash-screen {
       position: fixed;
       top: 0;
@@ -59,7 +58,7 @@
       align-items: center;
       flex-direction: column;
       z-index: 2000;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
     
     .splash-content {
@@ -68,14 +67,8 @@
     }
     
     @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
     
     .logo-wrapper-splash {
@@ -120,13 +113,15 @@
       margin: 20px auto;
     }
     
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
     .splash-text {
       font-size: 1rem;
       color: #aaa;
       letter-spacing: 2px;
     }
     
-    /* MAIN CONTAINER (awal hidden) */
+    /* MAIN CONTAINER */
     .mae-container {
       max-width: 800px;
       width: 100%;
@@ -146,7 +141,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    /* CREDITS / VIEW PAGE */
+    /* CREDITS MODAL */
     .credits-overlay {
       position: fixed;
       top: 0;
@@ -452,8 +447,6 @@
       margin: 20px auto;
     }
     
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    
     .loading-text {
       font-size: 1.3rem;
       letter-spacing: 2px;
@@ -477,21 +470,19 @@
 </head>
 <body>
 
-<!-- Video Background -->
 <video class="video-bg" autoplay loop muted playsinline>
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- Audio Background -->
 <audio id="bgAudio" src="audio.m4a" loop preload="auto"></audio>
 
 <div class="overlay"></div>
 
-<!-- SPLASH SCREEN (LOADING AWAL) -->
+<!-- SPLASH SCREEN -->
 <div class="splash-screen" id="splashScreen">
   <div class="splash-content">
     <div class="logo-wrapper-splash">
-      <img src="logo-marga.png" alt="Logo MAE" id="splashLogo" onerror="this.src='https://placehold.co/180x180?text=MAE'">
+      <img src="logo-marga.png" alt="Logo MAE" id="splashLogo">
     </div>
     <div class="splash-title">MAE SELECTION</div>
     <div class="splash-spinner"></div>
@@ -574,36 +565,56 @@
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
-  // ========== SPLASH SCREEN ==========
+  // ========== SPLASH SCREEN (DIPERBAIKI - PASTIKAN HILANG) ==========
   const splashScreen = document.getElementById('splashScreen');
   const mainContainer = document.getElementById('mainContainer');
   
+  // Fallback logo kalau error
+  const splashLogo = document.getElementById('splashLogo');
+  if(splashLogo) {
+    splashLogo.onerror = function() {
+      this.src = 'https://placehold.co/180x180/333/aaa?text=MAE';
+    };
+  }
+  
+  // PASTIKAN HILANG SETELAH 2 DETIK, APAPUN YANG TERJADI
   setTimeout(() => {
-    splashScreen.style.opacity = '0';
-    setTimeout(() => {
-      splashScreen.style.display = 'none';
-      mainContainer.style.display = 'block';
-    }, 800);
-  }, 3000); // 3 detik loading awal
+    if(splashScreen) {
+      splashScreen.style.transition = 'opacity 0.5s ease';
+      splashScreen.style.opacity = '0';
+      setTimeout(() => {
+        splashScreen.style.display = 'none';
+        if(mainContainer) mainContainer.style.display = 'block';
+      }, 500);
+    } else {
+      if(mainContainer) mainContainer.style.display = 'block';
+    }
+  }, 2000);
   
   // ========== CREDITS MODAL ==========
   const creditsBtn = document.getElementById('creditsBtn');
   const creditsModal = document.getElementById('creditsModal');
   const closeCreditsBtn = document.getElementById('closeCreditsBtn');
   
-  creditsBtn.addEventListener('click', () => {
-    creditsModal.classList.add('show');
-  });
+  if(creditsBtn) {
+    creditsBtn.addEventListener('click', () => {
+      creditsModal.classList.add('show');
+    });
+  }
   
-  closeCreditsBtn.addEventListener('click', () => {
-    creditsModal.classList.remove('show');
-  });
-  
-  creditsModal.addEventListener('click', (e) => {
-    if(e.target === creditsModal) {
+  if(closeCreditsBtn) {
+    closeCreditsBtn.addEventListener('click', () => {
       creditsModal.classList.remove('show');
-    }
-  });
+    });
+  }
+  
+  if(creditsModal) {
+    creditsModal.addEventListener('click', (e) => {
+      if(e.target === creditsModal) {
+        creditsModal.classList.remove('show');
+      }
+    });
+  }
   
   // ========== AUDIO BACKGROUND ==========
   const bgAudio = document.getElementById('bgAudio');
@@ -704,11 +715,4 @@
     if (!umur) { alert("⚠️ Masukkan umur!"); return; }
     if (!margaAsal) { alert("⚠️ Isi Marga Sebelum MAE!"); return; }
 
-    const doubleStatus = isDouble ? "✅ Ya (Double Marga)" : "❌ Tidak";
-    const finalAlasan = alasan === "" ? "Ingin membuktikan diri di MAE" : alasan;
-    const finalAsal = asal === "" ? "Jawa Timur" : asal;
-
-    showLoading();
-
-    const dataTelegram = { nama, umur, margaAsal, doubleStatus, asal: finalAsal, alasan: finalAlasan };
-    await sendToTelegram(dataTelegram);
+    const doubleStatus
