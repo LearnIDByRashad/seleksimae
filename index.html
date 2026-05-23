@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>⚡ MAE SELECTION | Pendaftaran ⚡</title>
   
-  <!-- Font Awesome Icons (lebih keren dari emoji) -->
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
 <style>
@@ -23,7 +23,7 @@
       overflow-x: hidden;
     }
     
-    /* Video Background dari file lokal video.mp4 */
+    /* Video Background dari file video.mp4 */
     .video-bg {
       position: fixed;
       top: 0;
@@ -239,6 +239,33 @@
       to { transform: scale(4); opacity: 0; }
     }
     
+    /* Music button kecil */
+    .music-control {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .music-btn {
+      background: #1a1a1a;
+      border: 1px solid #555;
+      border-radius: 30px;
+      padding: 6px 15px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: #ccc;
+      transition: all 0.2s;
+    }
+    
+    .music-btn:hover {
+      background: #2a2a2a;
+      color: #fff;
+      border-color: #888;
+    }
+    
+    .music-btn i {
+      margin-right: 6px;
+    }
+    
     footer { 
       text-align: center; 
       margin-top: 1.5rem; 
@@ -322,16 +349,27 @@
 <body>
 
 <!-- Video Background dari file video.mp4 -->
-<video class="video-bg" id="bgVideo" autoplay loop muted playsinline>
+<video class="video-bg" autoplay loop muted playsinline>
   <source src="video.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+<!-- Audio Background dari file audio.m4a (diam dulu) -->
+<audio id="bgAudio" src="audio.m4a" loop preload="auto"></audio>
+
 <div class="overlay"></div>
 
 <div class="mae-container">
   <div class="header">
     <h1><i class="fas fa-skull"></i> ✦ MAE SELECTION ✦ <i class="fas fa-dragon"></i></h1>
     <div class="sub"><i class="fas fa-bolt"></i> Daftar Sekarang · Battle Royale <i class="fas fa-bolt"></i></div>
+  </div>
+  
+  <!-- Tombol kecil buat nyalakan musik background -->
+  <div class="music-control">
+    <button id="playMusicBtn" class="music-btn">
+      <i class="fas fa-music"></i> Nyalakan Musik Latar
+    </button>
   </div>
 
   <div class="form-group">
@@ -380,12 +418,56 @@
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
-  // ========== SUARA KLIK dari file lokal suara.m4a ==========
+  // ========== AUDIO BACKGROUND (audio.m4a) ==========
+  const bgAudio = document.getElementById('bgAudio');
+  const playMusicBtn = document.getElementById('playMusicBtn');
+  let musicStarted = false;
+  
+  if(playMusicBtn) {
+    playMusicBtn.addEventListener('click', function() {
+      if(bgAudio) {
+        bgAudio.volume = 0.3;
+        bgAudio.play().then(() => {
+          playMusicBtn.innerHTML = '<i class="fas fa-volume-up"></i> Musik Menyala';
+          playMusicBtn.style.opacity = '0.6';
+          musicStarted = true;
+        }).catch(e => console.log("Audio play error:", e));
+      }
+    });
+  }
+  
+  // Juga nyalakan musik saat tombol DAFTAR diklik (sekalian)
+  function startMusicIfNeeded() {
+    if(!musicStarted && bgAudio) {
+      bgAudio.volume = 0.3;
+      bgAudio.play().catch(e => console.log(e));
+      musicStarted = true;
+      if(playMusicBtn) {
+        playMusicBtn.innerHTML = '<i class="fas fa-volume-up"></i> Musik Menyala';
+        playMusicBtn.style.opacity = '0.6';
+      }
+    }
+  }
+  
+  // ========== SUARA KLIK (bisa pakai audio pendek, opsional) ==========
   function playClickSound() {
-    const audio = new Audio();
-    audio.src = "suara.m4a";
-    audio.volume = 0.5;
-    audio.play().catch(e => console.log("Audio play error:", e));
+    // Suara klik pakai Web Audio API atau beep sederhana
+    // Karena file audio.m4a buat background, kita buat suara klik pakai cara lain
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.frequency.value = 800;
+      gainNode.gain.value = 0.1;
+      oscillator.start();
+      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+      oscillator.stop(audioCtx.currentTime + 0.3);
+      audioCtx.resume();
+    } catch(e) {
+      console.log("Web Audio API tidak didukung");
+    }
   }
   
   // ========== RIPPLE EFFECT ==========
@@ -435,10 +517,13 @@
   }
 
   async function executeSeleksi(event) {
-    // Play sound klik dari file lokal
+    // Play suara klik
     playClickSound();
     
-    // Ripple effect di tombol
+    // Start musik background kalau belum
+    startMusicIfNeeded();
+    
+    // Ripple effect
     const button = event.currentTarget;
     createRipple(event, button);
     
