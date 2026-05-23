@@ -44,7 +44,6 @@
       z-index: -1;
     }
     
-    /* Container umum */
     .container {
       max-width: 800px;
       width: 100%;
@@ -63,7 +62,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    /* HOME PAGE */
     .home-content {
       text-align: center;
     }
@@ -114,7 +112,7 @@
     }
     
     .admin-section h2 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       margin-bottom: 20px;
       background: linear-gradient(135deg, #e0e0e0, #9a9a9a);
       background-clip: text;
@@ -180,7 +178,6 @@
       transform: translateY(-2px);
     }
     
-    /* SELECTION PAGE (Form) */
     .selection-content {
       display: none;
     }
@@ -359,7 +356,6 @@
       margin: 0 4px;
     }
     
-    /* LOADING */
     .loading-overlay {
       position: fixed;
       top: 0;
@@ -439,10 +435,9 @@
 
 <div class="overlay"></div>
 
-<!-- MAIN CONTAINER (2 Halaman dalam 1) -->
 <div class="container" id="appContainer">
   
-  <!-- HALAMAN HOME (Kata Marga + Admin) -->
+  <!-- HALAMAN HOME -->
   <div id="homePage">
     <div class="home-content">
       <div class="logo-home">
@@ -459,7 +454,7 @@
       </div>
       
       <div class="admin-section">
-        <h2><i class="fas fa-users"></i> DEWAN PENDIRI</h2>
+        <h2><i class="fas fa-users"></i> ADMIN MARGA & OWNER</h2>
         <ul class="admin-list">
           <li><i class="fas fa-skull"></i> RAUL</li>
           <li><i class="fas fa-dragon"></i> YONZ</li>
@@ -479,7 +474,7 @@
     </div>
   </div>
   
-  <!-- HALAMAN SELECTION (Form Pendaftaran) -->
+  <!-- HALAMAN SELECTION -->
   <div id="selectionPage" style="display: none;">
     <div class="header">
       <h1><i class="fas fa-dragon"></i> ✦ MAE SELECTION ✦ <i class="fas fa-dragon"></i></h1>
@@ -533,12 +528,10 @@
 </div>
 
 <script>
-  // ========== KONFIGURASI ==========
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
-  // ========== NAVIGASI 2 HALAMAN ==========
   const homePage = document.getElementById('homePage');
   const selectionPage = document.getElementById('selectionPage');
   const goToSelectionBtn = document.getElementById('goToSelectionBtn');
@@ -554,24 +547,16 @@
     selectionPage.style.display = 'block';
   }
   
-  if(goToSelectionBtn) {
-    goToSelectionBtn.addEventListener('click', showSelection);
-  }
+  if(goToSelectionBtn) goToSelectionBtn.addEventListener('click', showSelection);
+  if(backToHomeBtn) backToHomeBtn.addEventListener('click', showHome);
   
-  if(backToHomeBtn) {
-    backToHomeBtn.addEventListener('click', showHome);
-  }
-  
-  // ========== AUDIO BACKGROUND ==========
   const bgAudio = document.getElementById('bgAudio');
   let musicStarted = false;
   
   function autoPlayMusic() {
     if(!musicStarted && bgAudio) {
       bgAudio.volume = 0.3;
-      bgAudio.play().then(() => {
-        musicStarted = true;
-      }).catch(e => console.log("Auto play ditolak browser:", e));
+      bgAudio.play().then(() => musicStarted = true).catch(e => console.log(e));
     }
   }
   
@@ -580,7 +565,6 @@
     document.removeEventListener('click', onClick);
   }, { once: true });
   
-  // ========== SUARA KLIK ==========
   function playClickSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -597,7 +581,6 @@
     } catch(e) {}
   }
   
-  // ========== RIPPLE EFFECT ==========
   function createRipple(event, button) {
     const rect = button.getBoundingClientRect();
     const x = event.clientX - rect.left;
