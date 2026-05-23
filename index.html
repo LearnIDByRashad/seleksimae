@@ -597,7 +597,7 @@
       <input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah, Jawa Timur">
     </div>
     
-    <!-- KOMENTAR/SARAN (FITUR BARU) -->
+    <!-- KOMENTAR/SARAN -->
     <div class="form-group">
       <label><i class="fas fa-comment-dots"></i> 7. Komentar / Saran (opsional)</label>
       <textarea id="komentar" rows="2" placeholder="Kritik, saran, atau pesan untuk admin MAE..."></textarea>
@@ -621,6 +621,37 @@
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
+  
+  // ========== NAVIGASI (DIPERBAIKI) ==========
+  const homePage = document.getElementById('homePage');
+  const selectionPage = document.getElementById('selectionPage');
+  const goToSelectionBtn = document.getElementById('goToSelectionBtn');
+  const backToHomeBtn = document.getElementById('backToHomeBtn');
+  
+  function showHome() {
+    homePage.style.display = 'block';
+    selectionPage.style.display = 'none';
+  }
+  
+  function showSelection() {
+    homePage.style.display = 'none';
+    selectionPage.style.display = 'block';
+  }
+  
+  // PASTIKAN TOMOL BEKERJA
+  if(goToSelectionBtn) {
+    goToSelectionBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      showSelection();
+    });
+  }
+  
+  if(backToHomeBtn) {
+    backToHomeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      showHome();
+    });
+  }
   
   // ========== MUSIC PLAYER & VISUALIZER ==========
   const bgAudio = document.getElementById('bgAudio');
@@ -663,31 +694,14 @@
     }
   }
   
-  document.addEventListener('click', function onClick() {
+  // Auto play saat klik pertama DI MANA SAJA (tapi gak ganggu tombol)
+  document.body.addEventListener('click', function onClick(e) {
     autoPlayMusic();
-    document.removeEventListener('click', onClick);
-  }, { once: true });
+    // Hapus setelah pertama kali biar gak double
+    document.body.removeEventListener('click', onClick);
+  });
   
   initAudio();
-  
-  // ========== NAVIGASI ==========
-  const homePage = document.getElementById('homePage');
-  const selectionPage = document.getElementById('selectionPage');
-  const goToSelectionBtn = document.getElementById('goToSelectionBtn');
-  const backToHomeBtn = document.getElementById('backToHomeBtn');
-  
-  function showHome() {
-    homePage.style.display = 'block';
-    selectionPage.style.display = 'none';
-  }
-  
-  function showSelection() {
-    homePage.style.display = 'none';
-    selectionPage.style.display = 'block';
-  }
-  
-  if(goToSelectionBtn) goToSelectionBtn.addEventListener('click', showSelection);
-  if(backToHomeBtn) backToHomeBtn.addEventListener('click', showHome);
   
   // ========== SUARA KLIK ==========
   function playClickSound() {
@@ -719,10 +733,3 @@
   }
   
   function showLoading() {
-    let loadingDiv = document.getElementById('loadingOverlay');
-    if(!loadingDiv) {
-      loadingDiv = document.createElement('div');
-      loadingDiv.id = 'loadingOverlay';
-      loadingDiv.className = 'loading-overlay';
-      loadingDiv.innerHTML = `
-        <div class="loadi
