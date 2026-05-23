@@ -23,6 +23,7 @@
       overflow-x: hidden;
     }
     
+    /* Video Background */
     .video-bg {
       position: fixed;
       top: 0;
@@ -44,6 +45,88 @@
       z-index: -1;
     }
     
+    /* SPLASH SCREEN / LOADING AWAL */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 2000;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    
+    .splash-content {
+      text-align: center;
+      animation: fadeInScale 0.8s ease-out;
+    }
+    
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .logo-wrapper-splash {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 30px rgba(255,255,255,0.2), 0 0 0 3px #555;
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 30px rgba(255,255,255,0.2), 0 0 0 3px #555; }
+      50% { box-shadow: 0 0 50px rgba(255,255,255,0.5), 0 0 0 3px #aaa; }
+    }
+    
+    .logo-wrapper-splash img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .splash-title {
+      font-size: 1.8rem;
+      letter-spacing: 5px;
+      background: linear-gradient(135deg, #e0e0e0, #9a9a9a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+    
+    .splash-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid #333;
+      border-top: 3px solid #aaa;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    
+    .splash-text {
+      font-size: 1rem;
+      color: #aaa;
+      letter-spacing: 2px;
+    }
+    
+    /* MAIN CONTAINER (awal hidden) */
     .mae-container {
       max-width: 800px;
       width: 100%;
@@ -55,11 +138,106 @@
       padding: 2rem 2rem 2.2rem;
       animation: fadeInUp 0.8s ease-out;
       z-index: 1;
+      display: none;
     }
     
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* CREDITS / VIEW PAGE */
+    .credits-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1500;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    
+    .credits-overlay.show {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .credits-card {
+      max-width: 500px;
+      width: 90%;
+      background: rgba(10,10,10,0.9);
+      border: 1px solid #555;
+      border-radius: 2rem;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeInScale 0.4s ease;
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    }
+    
+    .credits-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e0e0e0, #9a9a9a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    
+    .credits-card h3 {
+      font-size: 1.2rem;
+      margin: 20px 0 10px;
+      color: #bbb;
+      border-bottom: 1px solid #444;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    
+    .admin-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .admin-list li {
+      padding: 8px 0;
+      font-size: 1.1rem;
+      font-family: monospace;
+      border-bottom: 1px dashed #333;
+    }
+    
+    .admin-list li i {
+      margin-right: 10px;
+      color: #aaa;
+    }
+    
+    .tahun {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ccc;
+      margin: 15px 0;
+      letter-spacing: 3px;
+    }
+    
+    .close-credits {
+      background: #222;
+      border: 1px solid #555;
+      padding: 10px 25px;
+      border-radius: 40px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    
+    .close-credits:hover {
+      background: #333;
+      border-color: #888;
     }
     
     .header { text-align: center; margin-bottom: 2rem; }
@@ -91,23 +269,7 @@
       color: #bbb; 
     }
     
-    .form-group { 
-      margin-bottom: 1.4rem;
-      animation: fadeInLeft 0.5s ease-out;
-      animation-fill-mode: both;
-    }
-    
-    .form-group:nth-child(1) { animation-delay: 0.1s; }
-    .form-group:nth-child(2) { animation-delay: 0.2s; }
-    .form-group:nth-child(3) { animation-delay: 0.3s; }
-    .form-group:nth-child(4) { animation-delay: 0.4s; }
-    .form-group:nth-child(5) { animation-delay: 0.5s; }
-    .form-group:nth-child(6) { animation-delay: 0.6s; }
-    
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+    .form-group { margin-bottom: 1.4rem; }
     
     label { 
       display: flex; 
@@ -176,11 +338,6 @@
       color: #fff;
     }
     
-    .double-option label i {
-      width: auto;
-      font-size: 1rem;
-    }
-    
     input[type="radio"] { 
       width: 18px; 
       height: 18px; 
@@ -238,10 +395,15 @@
       margin-top: 1.5rem; 
       font-size: 0.65rem; 
       opacity: 0.6; 
+      cursor: pointer;
     }
     
     footer i {
       margin: 0 4px;
+    }
+    
+    footer:hover {
+      opacity: 1;
     }
     
     .loading-overlay {
@@ -308,6 +470,8 @@
     @media (max-width: 600px) {
       .mae-container { padding: 1.2rem; }
       .header h1 { font-size: 1.5rem; }
+      .logo-wrapper-splash { width: 120px; height: 120px; }
+      .splash-title { font-size: 1.2rem; }
     }
 </style>
 </head>
@@ -316,7 +480,6 @@
 <!-- Video Background -->
 <video class="video-bg" autoplay loop muted playsinline>
   <source src="video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 <!-- Audio Background -->
@@ -324,7 +487,21 @@
 
 <div class="overlay"></div>
 
-<div class="mae-container">
+<!-- SPLASH SCREEN (LOADING AWAL) -->
+<div class="splash-screen" id="splashScreen">
+  <div class="splash-content">
+    <div class="logo-wrapper-splash">
+      <img src="logo-marga.png" alt="Logo MAE" id="splashLogo" onerror="this.src='https://placehold.co/180x180?text=MAE'">
+    </div>
+    <div class="splash-title">MAE SELECTION</div>
+    <div class="splash-spinner"></div>
+    <div class="splash-text">⚡ SEDANG MEMUAT ⚡</div>
+    <div class="splash-text" style="font-size:0.7rem; margin-top:10px;">harap tunggu sebentar...</div>
+  </div>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="mae-container" id="mainContainer">
   <div class="header">
     <h1><i class="fas fa-dragon"></i> ✦ MAE SELECTION ✦ <i class="fas fa-dragon"></i></h1>
     <div class="sub"><i class="fas fa-bolt"></i> Daftar Sekarang <i class="fas fa-bolt"></i></div>
@@ -365,16 +542,70 @@
 
   <button id="btnSeleksi">DAFTAR SEKARANG</button>
   
-  <footer>
+  <footer id="creditsBtn">
     <i class="fas fa-shield-alt"></i> MAE SELECTION SYSTEM | battle ready <i class="fas fa-shield-alt"></i>
+    <div style="margin-top: 8px; font-size: 0.6rem;"><i class="fas fa-info-circle"></i> Klik untuk Info & Credit</div>
   </footer>
 </div>
 
+<!-- CREDITS MODAL -->
+<div class="credits-overlay" id="creditsModal">
+  <div class="credits-card">
+    <h2><i class="fas fa-crown"></i> MAE SELECTION</h2>
+    <div class="tahun">✦ 2021 - SEKARANG ✦</div>
+    <p style="margin-bottom: 10px; color:#aaa;">Tahun Berdiri Marga MAE</p>
+    
+    <h3><i class="fas fa-users"></i> DEWAN ADMIN</h3>
+    <ul class="admin-list">
+      <li><i class="fas fa-skull"></i> RAUL</li>
+      <li><i class="fas fa-dragon"></i> YONZ</li>
+      <li><i class="fas fa-crown"></i> NOVVA</li>
+      <li><i class="fas fa-shield-alt"></i> DIMM</li>
+      <li><i class="fas fa-star"></i> KYY JOESTAR</li>
+    </ul>
+    
+    <button class="close-credits" id="closeCreditsBtn"><i class="fas fa-times"></i> TUTUP</button>
+  </div>
+</div>
+
 <script>
+  // ========== KONFIGURASI ==========
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
+  // ========== SPLASH SCREEN ==========
+  const splashScreen = document.getElementById('splashScreen');
+  const mainContainer = document.getElementById('mainContainer');
+  
+  setTimeout(() => {
+    splashScreen.style.opacity = '0';
+    setTimeout(() => {
+      splashScreen.style.display = 'none';
+      mainContainer.style.display = 'block';
+    }, 800);
+  }, 3000); // 3 detik loading awal
+  
+  // ========== CREDITS MODAL ==========
+  const creditsBtn = document.getElementById('creditsBtn');
+  const creditsModal = document.getElementById('creditsModal');
+  const closeCreditsBtn = document.getElementById('closeCreditsBtn');
+  
+  creditsBtn.addEventListener('click', () => {
+    creditsModal.classList.add('show');
+  });
+  
+  closeCreditsBtn.addEventListener('click', () => {
+    creditsModal.classList.remove('show');
+  });
+  
+  creditsModal.addEventListener('click', (e) => {
+    if(e.target === creditsModal) {
+      creditsModal.classList.remove('show');
+    }
+  });
+  
+  // ========== AUDIO BACKGROUND ==========
   const bgAudio = document.getElementById('bgAudio');
   let musicStarted = false;
   
@@ -392,6 +623,7 @@
     document.removeEventListener('click', onClick);
   }, { once: true });
   
+  // ========== SUARA KLIK ==========
   function playClickSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -408,6 +640,7 @@
     } catch(e) {}
   }
   
+  // ========== RIPPLE EFFECT ==========
   function createRipple(event, button) {
     const rect = button.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -479,21 +712,3 @@
 
     const dataTelegram = { nama, umur, margaAsal, doubleStatus, asal: finalAsal, alasan: finalAlasan };
     await sendToTelegram(dataTelegram);
-
-    const delay = Math.floor(Math.random() * (5000 - 2000 + 1) + 2000);
-    
-    setTimeout(() => {
-      hideLoading();
-      window.open(LINK_GRUP_WA, '_blank');
-    }, delay);
-  }
-
-  const btn = document.getElementById('btnSeleksi');
-  btn.addEventListener('click', executeSeleksi);
-  
-  window.addEventListener('load', () => {
-    document.body.style.animation = 'fadeIn 0.5s ease';
-  });
-</script>
-</body>
-</html>
