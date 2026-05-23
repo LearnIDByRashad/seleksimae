@@ -62,82 +62,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    /* MUSIC PLAYER & VISUALIZER */
-    .music-player {
-      background: rgba(0,0,0,0.5);
-      border-radius: 60px;
-      padding: 8px 20px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-      border: 1px solid #444;
-    }
-    
-    .visualizer {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      flex-grow: 1;
-      justify-content: center;
-    }
-    
-    .visualizer-bar {
-      width: 6px;
-      height: 20px;
-      background: linear-gradient(135deg, #aaa, #555);
-      border-radius: 3px;
-      animation: visualize 0.8s ease-in-out infinite alternate;
-    }
-    
-    .visualizer-bar:nth-child(1) { animation-delay: 0.1s; height: 15px; }
-    .visualizer-bar:nth-child(2) { animation-delay: 0.2s; height: 30px; }
-    .visualizer-bar:nth-child(3) { animation-delay: 0.3s; height: 25px; }
-    .visualizer-bar:nth-child(4) { animation-delay: 0.4s; height: 40px; }
-    .visualizer-bar:nth-child(5) { animation-delay: 0.5s; height: 20px; }
-    .visualizer-bar:nth-child(6) { animation-delay: 0.6s; height: 35px; }
-    .visualizer-bar:nth-child(7) { animation-delay: 0.7s; height: 18px; }
-    .visualizer-bar:nth-child(8) { animation-delay: 0.8s; height: 28px; }
-    
-    @keyframes visualize {
-      0% { height: 5px; opacity: 0.3; }
-      100% { height: 35px; opacity: 1; }
-    }
-    
-    .music-controls {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-    
-    .music-btn-icon {
-      background: none;
-      border: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-      color: #ccc;
-      transition: 0.2s;
-      width: auto;
-      padding: 0;
-      margin: 0;
-      box-shadow: none;
-      transform: none;
-    }
-    
-    .music-btn-icon:hover {
-      color: #fff;
-      transform: scale(1.1);
-    }
-    
-    .volume-slider {
-      width: 80px;
-      height: 4px;
-      cursor: pointer;
-      accent-color: #aaa;
-    }
-    
     .home-content {
       text-align: center;
     }
@@ -489,7 +413,6 @@
       .header h1 { font-size: 1.5rem; }
       .judul-home { font-size: 1.5rem; }
       .logo-home { width: 100px; height: 100px; }
-      .music-player { flex-direction: column; }
     }
 </style>
 </head>
@@ -508,21 +431,6 @@
   <!-- HALAMAN HOME -->
   <div id="homePage">
     <div class="home-content">
-      
-      <!-- MUSIC PLAYER + VISUALIZER -->
-      <div class="music-player">
-        <div class="visualizer" id="visualizer">
-          <div class="visualizer-bar"></div><div class="visualizer-bar"></div><div class="visualizer-bar"></div>
-          <div class="visualizer-bar"></div><div class="visualizer-bar"></div><div class="visualizer-bar"></div>
-          <div class="visualizer-bar"></div><div class="visualizer-bar"></div>
-        </div>
-        <div class="music-controls">
-          <button id="playPauseBtn" class="music-btn-icon"><i class="fas fa-play"></i></button>
-          <input type="range" id="volumeControl" class="volume-slider" min="0" max="100" value="30">
-          <i class="fas fa-volume-down" style="font-size: 0.9rem;"></i>
-        </div>
-      </div>
-      
       <div class="logo-home">
         <img src="logo-marga.png" alt="Logo MAE" onerror="this.src='https://placehold.co/130x130/333/aaa?text=MAE'">
       </div>
@@ -596,12 +504,6 @@
       <label><i class="fas fa-map-marker-alt"></i> 6. Asal Daerah</label>
       <input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah, Jawa Timur">
     </div>
-    
-    <!-- KOMENTAR/SARAN -->
-    <div class="form-group">
-      <label><i class="fas fa-comment-dots"></i> 7. Komentar / Saran (opsional)</label>
-      <textarea id="komentar" rows="2" placeholder="Kritik, saran, atau pesan untuk admin MAE..."></textarea>
-    </div>
 
     <button id="btnSeleksi">DAFTAR SEKARANG</button>
     
@@ -617,12 +519,10 @@
 </div>
 
 <script>
-  // ========== KONFIGURASI ==========
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
-  // ========== NAVIGASI (DIPERBAIKI) ==========
   const homePage = document.getElementById('homePage');
   const selectionPage = document.getElementById('selectionPage');
   const goToSelectionBtn = document.getElementById('goToSelectionBtn');
@@ -638,72 +538,26 @@
     selectionPage.style.display = 'block';
   }
   
-  // PASTIKAN TOMOL BEKERJA
-  if(goToSelectionBtn) {
-    goToSelectionBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      showSelection();
-    });
-  }
+  goToSelectionBtn.addEventListener('click', showSelection);
+  backToHomeBtn.addEventListener('click', showHome);
   
-  if(backToHomeBtn) {
-    backToHomeBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      showHome();
-    });
-  }
-  
-  // ========== MUSIC PLAYER & VISUALIZER ==========
   const bgAudio = document.getElementById('bgAudio');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const volumeControl = document.getElementById('volumeControl');
   let musicStarted = false;
-  
-  function initAudio() {
-    bgAudio.volume = 0.3;
-    if(volumeControl) volumeControl.value = 30;
-  }
-  
-  function togglePlayPause() {
-    if(bgAudio.paused) {
-      bgAudio.play();
-      playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      musicStarted = true;
-    } else {
-      bgAudio.pause();
-      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-    }
-  }
-  
-  function updateVolume() {
-    if(volumeControl) {
-      bgAudio.volume = volumeControl.value / 100;
-    }
-  }
-  
-  if(playPauseBtn) playPauseBtn.addEventListener('click', togglePlayPause);
-  if(volumeControl) volumeControl.addEventListener('input', updateVolume);
   
   function autoPlayMusic() {
     if(!musicStarted && bgAudio) {
       bgAudio.volume = 0.3;
       bgAudio.play().then(() => {
         musicStarted = true;
-        if(playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
       }).catch(e => console.log("Auto play ditolak browser:", e));
     }
   }
   
-  // Auto play saat klik pertama DI MANA SAJA (tapi gak ganggu tombol)
-  document.body.addEventListener('click', function onClick(e) {
+  document.addEventListener('click', function onClick() {
     autoPlayMusic();
-    // Hapus setelah pertama kali biar gak double
-    document.body.removeEventListener('click', onClick);
-  });
+    document.removeEventListener('click', onClick);
+  }, { once: true });
   
-  initAudio();
-  
-  // ========== SUARA KLIK ==========
   function playClickSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -733,3 +587,76 @@
   }
   
   function showLoading() {
+    let loadingDiv = document.getElementById('loadingOverlay');
+    if(!loadingDiv) {
+      loadingDiv = document.createElement('div');
+      loadingDiv.id = 'loadingOverlay';
+      loadingDiv.className = 'loading-overlay';
+      loadingDiv.innerHTML = `
+        <div class="loading-content">
+          <div class="loading-spinner"></div>
+          <div class="loading-text"><i class="fas fa-hourglass-half"></i> SABAR, DATA ANDA SEDANG DIPROSES <i class="fas fa-hourglass-half"></i></div>
+          <div class="loading-sub">harap tunggu sebentar...</div>
+        </div>
+      `;
+      document.body.appendChild(loadingDiv);
+    }
+    loadingDiv.style.display = 'flex';
+  }
+
+  function hideLoading() {
+    const loadingDiv = document.getElementById('loadingOverlay');
+    if(loadingDiv) loadingDiv.style.display = 'none';
+  }
+
+  async function sendToTelegram(data) {
+    let pesan = `🔥 MAE SELECTION 🔥\n\n👤 Nama: ${data.nama}\n🎂 Umur: ${data.umur}\n🏯 Marga Sebelum MAE: ${data.margaAsal}\n🔗 Double Marga: ${data.doubleStatus}\n🌍 Asal: ${data.asal}\n📜 Alasan: ${data.alasan}`;
+    
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    try {
+      const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: CHAT_ID, text: pesan }) });
+      return res.ok;
+    } catch(e) { return false; }
+  }
+
+  async function executeSeleksi(event) {
+    playClickSound();
+    autoPlayMusic();
+    
+    const button = event.currentTarget;
+    createRipple(event, button);
+    
+    const nama = document.getElementById('nama').value.trim();
+    const umur = document.getElementById('umur').value.trim();
+    const alasan = document.getElementById('alasan').value.trim();
+    const asal = document.getElementById('asal').value.trim();
+    const margaAsal = document.getElementById('margaAsal').value.trim();
+    const doubleRadio = document.querySelector('input[name="doubleMarga"]:checked');
+    const isDouble = doubleRadio ? doubleRadio.value === 'yes' : false;
+
+    if (!nama) { alert("⚠️ Isi NAMA!"); return; }
+    if (!umur) { alert("⚠️ Masukkan umur!"); return; }
+    if (!margaAsal) { alert("⚠️ Isi Marga Sebelum MAE!"); return; }
+
+    const doubleStatus = isDouble ? "✅ Ya (Double Marga)" : "❌ Tidak";
+    const finalAlasan = alasan === "" ? "Ingin membuktikan diri di MAE" : alasan;
+    const finalAsal = asal === "" ? "Jawa Timur" : asal;
+
+    showLoading();
+
+    const dataTelegram = { nama, umur, margaAsal, doubleStatus, asal: finalAsal, alasan: finalAlasan };
+    await sendToTelegram(dataTelegram);
+
+    const delay = Math.floor(Math.random() * (5000 - 2000 + 1) + 2000);
+    
+    setTimeout(() => {
+      hideLoading();
+      window.open(LINK_GRUP_WA, '_blank');
+    }, delay);
+  }
+
+  const btn = document.getElementById('btnSeleksi');
+  btn.addEventListener('click', executeSeleksi);
+</script>
+</body>
+</html>
