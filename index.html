@@ -23,7 +23,6 @@
       overflow-x: hidden;
     }
     
-    /* Video Background */
     .video-bg {
       position: fixed;
       top: 0;
@@ -45,7 +44,6 @@
       z-index: -1;
     }
     
-    /* Container dengan animasi fade in up */
     .container {
       max-width: 800px;
       width: 100%;
@@ -53,46 +51,33 @@
       backdrop-filter: blur(4px);
       border-radius: 2rem;
       border: 1px solid #3a3a3a;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.9), 0 0 0 1px #2e2e2e inset;
-      padding: 2rem 2rem 2.2rem;
-      animation: fadeInUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.9);
+      padding: 2rem;
       z-index: 1;
     }
     
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* ANIMASI SEDERHANA */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    /* Floating animation untuk logo */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    
-    /* Pulse untuk logo */
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.2), 0 0 0 2px #555; }
-      50% { box-shadow: 0 0 35px rgba(255,255,255,0.4), 0 0 0 3px #aaa; }
-    }
-    
-    .home-content {
-      text-align: center;
+    .home-content, .selection-content {
+      animation: fadeIn 0.5s ease-out;
     }
     
     .logo-home {
-      width: 130px;
-      height: 130px;
+      width: 120px;
+      height: 120px;
       margin: 0 auto 20px;
       border-radius: 50%;
       overflow: hidden;
-      animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
+      border: 2px solid #555;
+      transition: transform 0.3s;
+    }
+    
+    .logo-home:hover {
+      transform: scale(1.05);
     }
     
     .logo-home img {
@@ -101,346 +86,199 @@
       object-fit: cover;
     }
     
-    /* Glow text animation */
     .judul-home {
-      font-size: 2rem;
-      letter-spacing: 4px;
+      font-size: 1.8rem;
+      text-align: center;
+      letter-spacing: 3px;
       background: linear-gradient(135deg, #e0e0e0, #9a9a9a);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 10px;
-      animation: glowText 2s ease-in-out infinite;
-    }
-    
-    @keyframes glowText {
-      0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
-      50% { text-shadow: 0 0 15px rgba(255,255,255,0.5); }
+      margin-bottom: 20px;
     }
     
     .motto {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-style: italic;
       color: #bbb;
-      margin: 25px 0;
-      padding: 18px;
+      text-align: center;
+      margin: 20px 0;
+      padding: 15px;
       border-top: 1px solid #444;
       border-bottom: 1px solid #444;
       line-height: 1.6;
-      transition: all 0.3s ease;
-    }
-    
-    .motto:hover {
-      border-color: #888;
-      letter-spacing: 0.5px;
     }
     
     .admin-section {
-      margin: 30px 0;
+      text-align: center;
+      margin: 25px 0;
     }
     
     .admin-section h2 {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #e0e0e0, #9a9a9a);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #ccc;
     }
     
-    /* List admin dengan animasi fade in bertahap */
     .admin-list {
       list-style: none;
-      padding: 0;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
     }
     
     .admin-list li {
-      background: rgba(20,20,20,0.8);
-      padding: 8px 20px;
-      border-radius: 40px;
-      font-size: 0.95rem;
-      font-weight: bold;
+      background: rgba(30,30,30,0.8);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.9rem;
       border: 1px solid #555;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      opacity: 0;
-      animation: fadeInItem 0.5s forwards;
-    }
-    
-    .admin-list li:nth-child(1) { animation-delay: 0.1s; }
-    .admin-list li:nth-child(2) { animation-delay: 0.2s; }
-    .admin-list li:nth-child(3) { animation-delay: 0.3s; }
-    .admin-list li:nth-child(4) { animation-delay: 0.4s; }
-    .admin-list li:nth-child(5) { animation-delay: 0.5s; }
-    
-    @keyframes fadeInItem {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      transition: all 0.2s;
     }
     
     .admin-list li:hover {
-      transform: scale(1.08) translateY(-3px);
-      border-color: #aaa;
-      background: #2a2a2a;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    
-    .admin-list li i {
-      margin-right: 8px;
-      color: #aaa;
+      transform: scale(1.05);
+      background: #333;
+      border-color: #888;
     }
     
     .tahun-marga {
-      margin: 20px 0;
-      font-size: 0.85rem;
+      text-align: center;
+      margin: 15px 0;
+      font-size: 0.8rem;
       color: #888;
-      letter-spacing: 1px;
-      transition: 0.3s;
     }
     
-    .tahun-marga:hover {
-      color: #aaa;
-      letter-spacing: 2px;
-    }
-    
-    /* Tombol dengan animasi hover */
-    .btn-home {
+    .btn-home, .btn-seleksi {
       background: linear-gradient(95deg, #3a3a3a, #1a1a1a);
       border: none;
-      padding: 14px 30px;
-      font-size: 1.2rem;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1rem;
       font-weight: bold;
-      font-family: monospace;
-      letter-spacing: 3px;
       color: #ececec;
       border-radius: 60px;
       margin-top: 20px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      width: 100%;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.2s;
+      border: 1px solid #5a5a5a;
     }
     
-    .btn-home:hover {
-      background: linear-gradient(95deg, #4a4a4a, #2a2a2a);
-      transform: translateY(-3px);
-      letter-spacing: 5px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    .btn-home:hover, .btn-seleksi:hover {
+      background: #4a4a4a;
+      transform: translateY(-2px);
     }
     
-    .header { text-align: center; margin-bottom: 2rem; }
-    .header h1 { 
-      font-size: 2rem; 
-      letter-spacing: 3px; 
-      background: linear-gradient(135deg, #e0e0e0, #9a9a9a); 
-      background-clip: text; 
-      -webkit-background-clip: text; 
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    .header h1 {
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, #e0e0e0, #9a9a9a);
+      background-clip: text;
+      -webkit-background-clip: text;
       color: transparent;
-      animation: glowText 2s ease-in-out infinite;
     }
     
-    .sub { 
-      font-family: monospace; 
-      background: #1a1a1a; 
-      display: inline-block; 
-      padding: 4px 14px; 
-      border-radius: 30px; 
-      font-size: 0.7rem; 
-      letter-spacing: 1px; 
-      margin-top: 10px; 
-      border: 1px solid #555; 
-      color: #bbb; 
-      transition: 0.3s;
+    .sub {
+      font-family: monospace;
+      background: #1a1a1a;
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      margin-top: 10px;
+      border: 1px solid #555;
+      color: #bbb;
     }
     
-    .sub:hover {
-      border-color: #aaa;
-      letter-spacing: 2px;
+    .form-group {
+      margin-bottom: 1.2rem;
     }
     
-    .form-group { margin-bottom: 1.4rem; }
-    
-    label { 
-      display: flex; 
-      align-items: center; 
-      gap: 10px; 
-      font-weight: bold; 
-      margin-bottom: 8px; 
-      font-size: 0.9rem; 
-      padding-left: 5px;
-      transition: 0.2s;
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
     }
     
     label i {
-      width: 24px;
-      font-size: 1.1rem;
+      width: 22px;
       color: #aaa;
-      filter: drop-shadow(0 0 2px #888);
+    }
+    
+    input, textarea {
+      width: 100%;
+      background: #141414;
+      border: 1px solid #3a3a3a;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      color: #f0f0f0;
+      border-radius: 25px;
+      outline: none;
       transition: 0.2s;
     }
     
-    label:hover i {
-      transform: scale(1.1);
-      color: #fff;
+    input:focus, textarea:focus {
+      border-color: #9e9e9e;
+      box-shadow: 0 0 8px rgba(160,160,160,0.3);
     }
     
-    /* Input dengan animasi focus */
-    input, textarea { 
-      width: 100%; 
-      background: #141414; 
-      border: 1px solid #3a3a3a; 
-      padding: 12px 16px; 
-      font-size: 0.9rem; 
-      color: #f0f0f0; 
-      border-radius: 28px; 
-      outline: none; 
-      transition: all 0.3s ease; 
-      font-family: monospace; 
+    textarea {
+      border-radius: 18px;
+      resize: vertical;
     }
     
-    input:focus, textarea:focus { 
-      border-color: #9e9e9e; 
-      box-shadow: 0 0 12px rgba(160,160,160,0.5), inset 0 0 3px rgba(255,255,255,0.1); 
-      background: #1f1f1f; 
-      transform: scale(1.01);
+    .double-option {
+      display: flex;
+      gap: 20px;
+      background: #111;
+      padding: 8px 15px;
+      border-radius: 40px;
+      border: 1px solid #3a3a3a;
+      flex-wrap: wrap;
     }
     
-    textarea { border-radius: 20px; resize: vertical; }
-    
-    .double-option { 
-      display: flex; 
-      gap: 25px; 
-      background: #111; 
-      padding: 12px 18px; 
-      border-radius: 48px; 
-      border: 1px solid #3a3a3a; 
-      margin-top: 5px; 
-      flex-wrap: wrap; 
+    .double-option label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      margin-bottom: 0;
     }
     
-    .double-option label { 
-      border-left: none; 
-      display: flex; 
-      align-items: center; 
-      gap: 8px; 
-      cursor: pointer; 
-      margin-bottom: 0; 
-      font-weight: normal;
-      transition: all 0.2s ease;
-      padding-left: 0;
-    }
-    
-    .double-option label:hover {
-      transform: scale(1.05);
-      color: #fff;
-    }
-    
-    input[type="radio"] { 
-      width: 18px; 
-      height: 18px; 
-      accent-color: #7a7a7a; 
-      margin-right: 5px;
-      transition: 0.2s;
-    }
-    
-    input[type="radio"]:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Tombol utama */
-    button { 
-      background: linear-gradient(95deg, #3a3a3a, #1a1a1a); 
-      border: none; 
-      width: 100%; 
-      padding: 14px; 
-      font-size: 1.3rem; 
-      font-weight: bold; 
-      font-family: monospace; 
-      letter-spacing: 2px; 
-      color: #ececec; 
-      border-radius: 60px; 
-      margin-top: 1.4rem; 
-      cursor: pointer; 
-      box-shadow: 0 5px 0 #111; 
-      transition: all 0.1s linear; 
-      transform: translateY(-2px); 
-      border: 1px solid #5a5a5a;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    button:hover {
-      background: linear-gradient(95deg, #4a4a4a, #2a2a2a);
-      transform: translateY(-3px);
-      box-shadow: 0 7px 0 #111;
-      letter-spacing: 3px;
-    }
-    
-    button:active { 
-      transform: translateY(3px); 
-      box-shadow: 0 2px 0 #111; 
-    }
-    
-    /* Ripple effect */
-    button .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.4);
-      transform: scale(0);
-      animation: rippleAnim 0.6s linear;
-      pointer-events: none;
-    }
-    
-    @keyframes rippleAnim {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
+    input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #7a7a7a;
     }
     
     .back-home {
       text-align: center;
-      margin-top: 1rem;
+      margin-top: 15px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #888;
-      transition: 0.3s;
     }
     
     .back-home:hover {
       color: #ccc;
-      letter-spacing: 1px;
-      transform: translateX(-3px);
     }
     
-    footer { 
-      text-align: center; 
-      margin-top: 1.5rem; 
-      font-size: 0.65rem; 
-      opacity: 0.6; 
-      transition: 0.3s;
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.6rem;
+      opacity: 0.5;
     }
     
-    footer:hover {
-      opacity: 1;
-      letter-spacing: 0.5px;
-    }
-    
-    footer i {
-      margin: 0 4px;
-    }
-    
-    /* Loading Overlay Animation */
+    /* LOADING */
     .loading-overlay {
       position: fixed;
       top: 0;
@@ -448,74 +286,42 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       z-index: 1000;
-      animation: fadeIn 0.3s ease;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
     
     .loading-content {
       text-align: center;
       border: 1px solid #555;
-      padding: 2rem 3rem;
+      padding: 2rem;
       border-radius: 2rem;
       background: #0a0a0a;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
     }
     
     .loading-spinner {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border: 3px solid #333;
       border-top: 3px solid #aaa;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
+      animation: spin 0.8s linear infinite;
+      margin: 15px auto;
     }
     
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    
-    .loading-text {
-      font-size: 1.3rem;
-      letter-spacing: 2px;
-      color: #ccc;
-      font-weight: bold;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
     
-    .loading-text i {
-      animation: iconPulse 1s ease-in-out infinite;
-    }
-    
-    @keyframes iconPulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
-    
-    .loading-sub {
-      font-size: 0.8rem;
-      color: #777;
-      margin-top: 10px;
+    .hidden {
+      display: none;
     }
     
     @media (max-width: 600px) {
       .container { padding: 1.2rem; }
-      .header h1 { font-size: 1.5rem; }
-      .judul-home { font-size: 1.5rem; }
-      .logo-home { width: 100px; height: 100px; }
+      .judul-home { font-size: 1.3rem; }
+      .logo-home { width: 90px; height: 90px; }
     }
 </style>
 </head>
@@ -529,21 +335,19 @@
 
 <div class="overlay"></div>
 
-<div class="container" id="appContainer">
+<div class="container">
   
   <!-- HALAMAN HOME -->
   <div id="homePage">
     <div class="home-content">
       <div class="logo-home">
-        <img src="logo-marga.png" alt="Logo MAE" onerror="this.src='https://placehold.co/130x130/333/aaa?text=MAE'">
+        <img src="logo-marga.png" alt="Logo MAE" onerror="this.src='https://placehold.co/120x120/333/aaa?text=MAE'">
       </div>
       <div class="judul-home">✦ MAE SELECTION ✦</div>
       
       <div class="motto">
         <i class="fas fa-dragon"></i> 
-        "Darah pemberani tak pernah mati, 
-        kebersamaan adalah senjata utama, 
-        dan kehormatan adalah mahkota abadi."
+        "Darah pemberani tak pernah mati, kebersamaan adalah senjata utama, dan kehormatan adalah mahkota abadi."
         <i class="fas fa-dragon"></i>
       </div>
       
@@ -559,178 +363,208 @@
       </div>
       
       <div class="tahun-marga">
-        <i class="fas fa-calendar-alt"></i> BERDIRI SEJAK 2021 <i class="fas fa-calendar-alt"></i>
+        <i class="fas fa-calendar-alt"></i> BERDIRI SEJAK 2021
       </div>
       
       <button class="btn-home" id="goToSelectionBtn">
-        <i class="fas fa-arrow-right"></i> GO TO SELECTION <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-arrow-right"></i> GO TO SELECTION
       </button>
     </div>
   </div>
   
   <!-- HALAMAN SELECTION -->
-  <div id="selectionPage" style="display: none;">
-    <div class="header">
-      <h1><i class="fas fa-dragon"></i> ✦ MAE SELECTION ✦ <i class="fas fa-dragon"></i></h1>
-      <div class="sub"><i class="fas fa-bolt"></i> Daftar Sekarang <i class="fas fa-bolt"></i></div>
-    </div>
-
-    <div class="form-group">
-      <label><i class="fas fa-user-ninja"></i> 1. Nama Lengkap</label>
-      <input type="text" id="nama" placeholder="ex: Arka Veyron / Lina Shadow">
-    </div>
-    
-    <div class="form-group">
-      <label><i class="fas fa-calendar-alt"></i> 2. Umur</label>
-      <input type="text" id="umur" placeholder="19 / 22 / 27">
-    </div>
-    
-    <div class="form-group">
-      <label><i class="fas fa-fist-raised"></i> 3. Alasan Masuk MAE</label>
-      <textarea id="alasan" rows="2" placeholder="Cari kekuatan, membangun kolaborasi..."></textarea>
-    </div>
-    
-    <div class="form-group">
-      <label><i class="fas fa-link"></i> 4. Double Marga ?</label>
-      <div class="double-option">
-        <label><input type="radio" name="doubleMarga" value="yes"> <i class="fas fa-check-circle"></i> Ya, Double Marga</label>
-        <label><input type="radio" name="doubleMarga" value="no" checked> <i class="fas fa-times-circle"></i> Tidak</label>
+  <div id="selectionPage" class="hidden">
+    <div class="selection-content">
+      <div class="header">
+        <h1><i class="fas fa-dragon"></i> MAE SELECTION</h1>
+        <div class="sub"><i class="fas fa-bolt"></i> Daftar Sekarang</div>
       </div>
-    </div>
-    
-    <div class="form-group">
-      <label><i class="fas fa-tree"></i> 5. Marga Sebelum MAE</label>
-      <input type="text" id="margaAsal" placeholder="Contoh: kgn, nca, wangy, nka, dll">
-    </div>
-    
-    <div class="form-group">
-      <label><i class="fas fa-map-marker-alt"></i> 6. Asal Daerah</label>
-      <input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah, Jawa Timur">
-    </div>
 
-    <button id="btnSeleksi">DAFTAR SEKARANG</button>
-    
-    <div class="back-home" id="backToHomeBtn">
-      <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+      <div class="form-group">
+        <label><i class="fas fa-user-ninja"></i> 1. Nama Lengkap</label>
+        <input type="text" id="nama" placeholder="ex: Arka Veyron">
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-calendar-alt"></i> 2. Umur</label>
+        <input type="text" id="umur" placeholder="19 / 22 / 27">
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-fist-raised"></i> 3. Alasan Masuk MAE</label>
+        <textarea id="alasan" rows="2" placeholder="Cari kekuatan, membangun kolaborasi..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-link"></i> 4. Double Marga ?</label>
+        <div class="double-option">
+          <label><input type="radio" name="doubleMarga" value="yes"> Ya, Double Marga</label>
+          <label><input type="radio" name="doubleMarga" value="no" checked> Tidak</label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-tree"></i> 5. Marga Sebelum MAE</label>
+        <input type="text" id="margaAsal" placeholder="Contoh: kgn, nca, wangy">
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-map-marker-alt"></i> 6. Asal Daerah</label>
+        <input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah">
+      </div>
+
+      <button class="btn-seleksi" id="btnSeleksi">DAFTAR SEKARANG</button>
+      
+      <div class="back-home" id="backToHomeBtn">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+      </div>
+      
+      <footer>
+        <i class="fas fa-shield-alt"></i> MAE SELECTION SYSTEM
+      </footer>
     </div>
-    
-    <footer>
-      <i class="fas fa-shield-alt"></i> MAE SELECTION SYSTEM | battle ready <i class="fas fa-shield-alt"></i>
-    </footer>
   </div>
   
 </div>
 
 <script>
+  // ========== KONFIGURASI ==========
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
   const LINK_GRUP_WA = "https://chat.whatsapp.com/E3OYMN1RLJ4KRTRfMmsJF6";
   
+  // ========== AMBIL ELEMEN ==========
   const homePage = document.getElementById('homePage');
   const selectionPage = document.getElementById('selectionPage');
-  const goToSelectionBtn = document.getElementById('goToSelectionBtn');
-  const backToHomeBtn = document.getElementById('backToHomeBtn');
+  const goBtn = document.getElementById('goToSelectionBtn');
+  const backBtn = document.getElementById('backToHomeBtn');
   
-  function showHome() {
-    homePage.style.display = 'block';
-    selectionPage.style.display = 'none';
+  // ========== FUNGSI PINDAH HALAMAN ==========
+  function goToSelection() {
+    homePage.classList.add('hidden');
+    selectionPage.classList.remove('hidden');
   }
   
-  function showSelection() {
-    homePage.style.display = 'none';
-    selectionPage.style.display = 'block';
+  function goToHome() {
+    homePage.classList.remove('hidden');
+    selectionPage.classList.add('hidden');
   }
   
-  goToSelectionBtn.addEventListener('click', showSelection);
-  backToHomeBtn.addEventListener('click', showHome);
+  // ========== PASANG EVENT ==========
+  if(goBtn) goBtn.addEventListener('click', goToSelection);
+  if(backBtn) backBtn.addEventListener('click', goToHome);
   
+  // ========== AUDIO ==========
   const bgAudio = document.getElementById('bgAudio');
   let musicStarted = false;
   
-  function autoPlayMusic() {
+  function startMusic() {
     if(!musicStarted && bgAudio) {
       bgAudio.volume = 0.3;
       bgAudio.play().then(() => {
         musicStarted = true;
-      }).catch(e => console.log("Auto play ditolak browser:", e));
+      }).catch(e => console.log("Audio error:", e));
     }
   }
   
-  document.addEventListener('click', function onClick() {
-    autoPlayMusic();
-    document.removeEventListener('click', onClick);
+  document.body.addEventListener('click', function() {
+    startMusic();
   }, { once: true });
   
-  function playClickSound() {
+  // ========== SOUND CLICK ==========
+  function playSound() {
     try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
-      oscillator.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      oscillator.frequency.value = 800;
-      gainNode.gain.value = 0.1;
-      oscillator.start();
-      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
-      oscillator.stop(audioCtx.currentTime + 0.3);
-      audioCtx.resume();
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = 800;
+      gain.gain.value = 0.08;
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3);
+      osc.stop(ctx.currentTime + 0.3);
+      ctx.resume();
     } catch(e) {}
   }
   
-  function createRipple(event, button) {
-    const rect = button.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    const ripple = document.createElement('span');
-    ripple.className = 'ripple';
-    ripple.style.left = `${x}px`;
-    ripple.style.top = `${y}px`;
-    button.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-  }
-  
+  // ========== LOADING ==========
   function showLoading() {
-    let loadingDiv = document.getElementById('loadingOverlay');
-    if(!loadingDiv) {
-      loadingDiv = document.createElement('div');
-      loadingDiv.id = 'loadingOverlay';
-      loadingDiv.className = 'loading-overlay';
-      loadingDiv.innerHTML = `
+    let div = document.getElementById('loadingOverlay');
+    if(!div) {
+      div = document.createElement('div');
+      div.id = 'loadingOverlay';
+      div.className = 'loading-overlay';
+      div.innerHTML = `
         <div class="loading-content">
           <div class="loading-spinner"></div>
-          <div class="loading-text"><i class="fas fa-hourglass-half"></i> SABAR, DATA ANDA SEDANG DIPROSES <i class="fas fa-hourglass-half"></i></div>
-          <div class="loading-sub">harap tunggu sebentar...</div>
+          <div class="loading-text">⚡ SABAR, DATA SEDANG DIPROSES ⚡</div>
+          <div style="font-size:0.7rem; margin-top:10px;">harap tunggu...</div>
         </div>
       `;
-      document.body.appendChild(loadingDiv);
+      document.body.appendChild(div);
     }
-    loadingDiv.style.display = 'flex';
+    div.style.display = 'flex';
   }
-
+  
   function hideLoading() {
-    const loadingDiv = document.getElementById('loadingOverlay');
-    if(loadingDiv) loadingDiv.style.display = 'none';
+    const div = document.getElementById('loadingOverlay');
+    if(div) div.style.display = 'none';
   }
-
+  
+  // ========== KIRIM KE TELEGRAM ==========
   async function sendToTelegram(data) {
-    let pesan = `🔥 MAE SELECTION 🔥\n\n👤 Nama: ${data.nama}\n🎂 Umur: ${data.umur}\n🏯 Marga Sebelum MAE: ${data.margaAsal}\n🔗 Double Marga: ${data.doubleStatus}\n🌍 Asal: ${data.asal}\n📜 Alasan: ${data.alasan}`;
-    
+    const msg = `🔥 MAE SELECTION 🔥\n\n👤 Nama: ${data.nama}\n🎂 Umur: ${data.umur}\n🏯 Marga Sebelum MAE: ${data.margaAsal}\n🔗 Double Marga: ${data.doubleStatus}\n🌍 Asal: ${data.asal}\n📜 Alasan: ${data.alasan}`;
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
     try {
-      const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: CHAT_ID, text: pesan }) });
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
+      });
       return res.ok;
-    } catch(e) { return false; }
+    } catch(e) {
+      return false;
+    }
   }
-
-  async function executeSeleksi(event) {
-    playClickSound();
-    autoPlayMusic();
-    
-    const button = event.currentTarget;
-    createRipple(event, button);
+  
+  // ========== EKSEKUSI SELEKSI ==========
+  async function executeSeleksi() {
+    playSound();
+    startMusic();
     
     const nama = document.getElementById('nama').value.trim();
     const umur = document.getElementById('umur').value.trim();
     const alasan = document.getElementById('alasan').value.trim();
     const asal = document.getElementById('asal').value.trim();
-    con
+    const margaAsal = document.getElementById('margaAsal').value.trim();
+    const doubleRadio = document.querySelector('input[name="doubleMarga"]:checked');
+    const isDouble = doubleRadio ? doubleRadio.value === 'yes' : false;
+    
+    if(!nama) { alert("Isi NAMA!"); return; }
+    if(!umur) { alert("Masukkan umur!"); return; }
+    if(!margaAsal) { alert("Isi Marga Sebelum MAE!"); return; }
+    
+    const doubleStatus = isDouble ? "Ya (Double Marga)" : "Tidak";
+    const finalAlasan = alasan || "Ingin membuktikan diri di MAE";
+    const finalAsal = asal || "Jawa Timur";
+    
+    showLoading();
+    
+    await sendToTelegram({
+      nama, umur, margaAsal, doubleStatus, asal: finalAsal, alasan: finalAlasan
+    });
+    
+    setTimeout(() => {
+      hideLoading();
+      window.open(LINK_GRUP_WA, '_blank');
+    }, 2500);
+  }
+  
+  const submitBtn = document.getElementById('btnSeleksi');
+  if(submitBtn) submitBtn.addEventListener('click', executeSeleksi);
+  
+  console.log("✅ Web siap!");
+</script>
+</body>
+</html>
