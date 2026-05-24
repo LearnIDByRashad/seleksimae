@@ -23,6 +23,7 @@
       overflow-x: hidden;
     }
     
+    /* Video Background */
     .video-bg {
       position: fixed;
       top: 0;
@@ -44,6 +45,7 @@
       z-index: -1;
     }
     
+    /* Container dengan animasi fade in up */
     .container {
       max-width: 800px;
       width: 100%;
@@ -53,13 +55,31 @@
       border: 1px solid #3a3a3a;
       box-shadow: 0 20px 35px rgba(0,0,0,0.9), 0 0 0 1px #2e2e2e inset;
       padding: 2rem 2rem 2.2rem;
-      animation: fadeInUp 0.8s ease-out;
+      animation: fadeInUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       z-index: 1;
     }
     
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Floating animation untuk logo */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    /* Pulse untuk logo */
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.2), 0 0 0 2px #555; }
+      50% { box-shadow: 0 0 35px rgba(255,255,255,0.4), 0 0 0 3px #aaa; }
     }
     
     .home-content {
@@ -72,7 +92,7 @@
       margin: 0 auto 20px;
       border-radius: 50%;
       overflow: hidden;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2), 0 0 0 2px #555;
+      animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
     }
     
     .logo-home img {
@@ -81,6 +101,7 @@
       object-fit: cover;
     }
     
+    /* Glow text animation */
     .judul-home {
       font-size: 2rem;
       letter-spacing: 4px;
@@ -89,6 +110,12 @@
       -webkit-background-clip: text;
       color: transparent;
       margin-bottom: 10px;
+      animation: glowText 2s ease-in-out infinite;
+    }
+    
+    @keyframes glowText {
+      0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+      50% { text-shadow: 0 0 15px rgba(255,255,255,0.5); }
     }
     
     .motto {
@@ -100,6 +127,12 @@
       border-top: 1px solid #444;
       border-bottom: 1px solid #444;
       line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+    
+    .motto:hover {
+      border-color: #888;
+      letter-spacing: 0.5px;
     }
     
     .admin-section {
@@ -115,6 +148,7 @@
       color: transparent;
     }
     
+    /* List admin dengan animasi fade in bertahap */
     .admin-list {
       list-style: none;
       padding: 0;
@@ -131,13 +165,33 @@
       font-size: 0.95rem;
       font-weight: bold;
       border: 1px solid #555;
-      transition: all 0.2s;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      opacity: 0;
+      animation: fadeInItem 0.5s forwards;
+    }
+    
+    .admin-list li:nth-child(1) { animation-delay: 0.1s; }
+    .admin-list li:nth-child(2) { animation-delay: 0.2s; }
+    .admin-list li:nth-child(3) { animation-delay: 0.3s; }
+    .admin-list li:nth-child(4) { animation-delay: 0.4s; }
+    .admin-list li:nth-child(5) { animation-delay: 0.5s; }
+    
+    @keyframes fadeInItem {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
     
     .admin-list li:hover {
-      transform: scale(1.05);
+      transform: scale(1.08) translateY(-3px);
       border-color: #aaa;
       background: #2a2a2a;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
     
     .admin-list li i {
@@ -150,8 +204,15 @@
       font-size: 0.85rem;
       color: #888;
       letter-spacing: 1px;
+      transition: 0.3s;
     }
     
+    .tahun-marga:hover {
+      color: #aaa;
+      letter-spacing: 2px;
+    }
+    
+    /* Tombol dengan animasi hover */
     .btn-home {
       background: linear-gradient(95deg, #3a3a3a, #1a1a1a);
       border: none;
@@ -164,13 +225,17 @@
       border-radius: 60px;
       margin-top: 20px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       width: 100%;
+      position: relative;
+      overflow: hidden;
     }
     
     .btn-home:hover {
       background: linear-gradient(95deg, #4a4a4a, #2a2a2a);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      letter-spacing: 5px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
     
     .header { text-align: center; margin-bottom: 2rem; }
@@ -181,12 +246,7 @@
       background-clip: text; 
       -webkit-background-clip: text; 
       color: transparent;
-      animation: glow 2s ease-in-out infinite;
-    }
-    
-    @keyframes glow {
-      0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
-      50% { text-shadow: 0 0 15px rgba(255,255,255,0.5); }
+      animation: glowText 2s ease-in-out infinite;
     }
     
     .sub { 
@@ -200,6 +260,12 @@
       margin-top: 10px; 
       border: 1px solid #555; 
       color: #bbb; 
+      transition: 0.3s;
+    }
+    
+    .sub:hover {
+      border-color: #aaa;
+      letter-spacing: 2px;
     }
     
     .form-group { margin-bottom: 1.4rem; }
@@ -212,6 +278,7 @@
       margin-bottom: 8px; 
       font-size: 0.9rem; 
       padding-left: 5px;
+      transition: 0.2s;
     }
     
     label i {
@@ -219,8 +286,15 @@
       font-size: 1.1rem;
       color: #aaa;
       filter: drop-shadow(0 0 2px #888);
+      transition: 0.2s;
     }
     
+    label:hover i {
+      transform: scale(1.1);
+      color: #fff;
+    }
+    
+    /* Input dengan animasi focus */
     input, textarea { 
       width: 100%; 
       background: #141414; 
@@ -236,7 +310,7 @@
     
     input:focus, textarea:focus { 
       border-color: #9e9e9e; 
-      box-shadow: 0 0 10px #5a5a5a; 
+      box-shadow: 0 0 12px rgba(160,160,160,0.5), inset 0 0 3px rgba(255,255,255,0.1); 
       background: #1f1f1f; 
       transform: scale(1.01);
     }
@@ -276,8 +350,14 @@
       height: 18px; 
       accent-color: #7a7a7a; 
       margin-right: 5px;
+      transition: 0.2s;
     }
     
+    input[type="radio"]:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Tombol utama */
     button { 
       background: linear-gradient(95deg, #3a3a3a, #1a1a1a); 
       border: none; 
@@ -303,6 +383,7 @@
       background: linear-gradient(95deg, #4a4a4a, #2a2a2a);
       transform: translateY(-3px);
       box-shadow: 0 7px 0 #111;
+      letter-spacing: 3px;
     }
     
     button:active { 
@@ -310,17 +391,21 @@
       box-shadow: 0 2px 0 #111; 
     }
     
+    /* Ripple effect */
     button .ripple {
       position: absolute;
       border-radius: 50%;
-      background: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.4);
       transform: scale(0);
       animation: rippleAnim 0.6s linear;
       pointer-events: none;
     }
     
     @keyframes rippleAnim {
-      to { transform: scale(4); opacity: 0; }
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
     }
     
     .back-home {
@@ -329,11 +414,13 @@
       cursor: pointer;
       font-size: 0.8rem;
       color: #888;
-      transition: 0.2s;
+      transition: 0.3s;
     }
     
     .back-home:hover {
       color: #ccc;
+      letter-spacing: 1px;
+      transform: translateX(-3px);
     }
     
     footer { 
@@ -341,12 +428,19 @@
       margin-top: 1.5rem; 
       font-size: 0.65rem; 
       opacity: 0.6; 
+      transition: 0.3s;
+    }
+    
+    footer:hover {
+      opacity: 1;
+      letter-spacing: 0.5px;
     }
     
     footer i {
       margin: 0 4px;
     }
     
+    /* Loading Overlay Animation */
     .loading-overlay {
       position: fixed;
       top: 0;
@@ -400,6 +494,15 @@
       letter-spacing: 2px;
       color: #ccc;
       font-weight: bold;
+    }
+    
+    .loading-text i {
+      animation: iconPulse 1s ease-in-out infinite;
+    }
+    
+    @keyframes iconPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; transform: scale(1.1); }
     }
     
     .loading-sub {
@@ -630,33 +733,4 @@
     const umur = document.getElementById('umur').value.trim();
     const alasan = document.getElementById('alasan').value.trim();
     const asal = document.getElementById('asal').value.trim();
-    const margaAsal = document.getElementById('margaAsal').value.trim();
-    const doubleRadio = document.querySelector('input[name="doubleMarga"]:checked');
-    const isDouble = doubleRadio ? doubleRadio.value === 'yes' : false;
-
-    if (!nama) { alert("⚠️ Isi NAMA!"); return; }
-    if (!umur) { alert("⚠️ Masukkan umur!"); return; }
-    if (!margaAsal) { alert("⚠️ Isi Marga Sebelum MAE!"); return; }
-
-    const doubleStatus = isDouble ? "✅ Ya (Double Marga)" : "❌ Tidak";
-    const finalAlasan = alasan === "" ? "Ingin membuktikan diri di MAE" : alasan;
-    const finalAsal = asal === "" ? "Jawa Timur" : asal;
-
-    showLoading();
-
-    const dataTelegram = { nama, umur, margaAsal, doubleStatus, asal: finalAsal, alasan: finalAlasan };
-    await sendToTelegram(dataTelegram);
-
-    const delay = Math.floor(Math.random() * (5000 - 2000 + 1) + 2000);
-    
-    setTimeout(() => {
-      hideLoading();
-      window.open(LINK_GRUP_WA, '_blank');
-    }, delay);
-  }
-
-  const btn = document.getElementById('btnSeleksi');
-  btn.addEventListener('click', executeSeleksi);
-</script>
-</body>
-</html>
+    con
