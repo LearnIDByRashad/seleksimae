@@ -61,7 +61,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    .home-content, .selection-content, .syarat-content {
+    .home-content, .syarat-content, .selection-content {
       animation: fadeIn 0.5s ease-out;
     }
     
@@ -271,13 +271,6 @@
       color: #ccc;
     }
     
-    footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 0.6rem;
-      opacity: 0.5;
-    }
-    
     .credit {
       text-align: center;
       margin-top: 20px;
@@ -442,9 +435,7 @@
         <i class="fas fa-calendar-alt"></i> BERDIRI SEJAK 2021
       </div>
       
-      <button class="btn-home" id="goToSyaratBtn">
-        <i class="fas fa-arrow-right"></i> LANJUTKAN PENDAFTARAN
-      </button>
+      <button class="btn-home" id="goToSyaratBtn">LANJUTKAN PENDAFTARAN</button>
     </div>
   </div>
   
@@ -453,7 +444,7 @@
     <div class="syarat-content">
       <div class="header">
         <h1><i class="fas fa-clipboard-list"></i> SYARAT MASUK MAE</h1>
-        <div class="sub"><i class="fas fa-tiktok"></i> Verifikasi TikTok</div>
+        <div class="sub"><i class="fab fa-tiktok"></i> Verifikasi TikTok</div>
       </div>
       
       <div class="syarat-box">
@@ -496,9 +487,7 @@
         <label for="checkPosting">✅ Saya sudah posting video dengan tagar #maefamily dan #maefanbase</label>
       </div>
       
-      <button class="btn-syarat" id="verifikasiBtn" disabled>
-        <i class="fas fa-check-circle"></i> VERIFIKASI & LANJUTKAN
-      </button>
+      <button class="btn-syarat" id="verifikasiBtn" disabled>VERIFIKASI & LANJUTKAN</button>
       
       <div class="back-syarat" id="backToHomeFromSyarat">
         <i class="fas fa-arrow-left"></i> Kembali ke Beranda
@@ -510,7 +499,7 @@
     </div>
   </div>
   
-  <!-- HALAMAN SELECTION (FORM PENDAFTARAN LENGKAP) -->
+  <!-- HALAMAN SELECTION -->
   <div id="selectionPage" class="hidden">
     <div class="selection-content">
       <div class="header">
@@ -553,7 +542,7 @@
       
       <div class="form-group">
         <label><i class="fab fa-tiktok"></i> Username TikTok</label>
-        <input type="text" id="tiktokFinal" placeholder="Username TikTok kamu" readonly style="background:#0a0a0a; color:#ffaa44;">
+        <input type="text" id="tiktokFinal" placeholder="Username TikTok" readonly style="background:#0a0a0a; color:#ffaa44;">
       </div>
 
       <button class="btn-seleksi" id="btnSeleksi">DAFTAR SEKARANG</button>
@@ -595,63 +584,82 @@
   const tiktokFinal = document.getElementById('tiktokFinal');
   
   // ========== FUNGSI PINDAH HALAMAN ==========
-  function goToSyarat() {
-    homePage.classList.add('hidden');
-    syaratPage.classList.remove('hidden');
-    selectionPage.classList.add('hidden');
-  }
-  
-  function goToHome() {
+  function showHome() {
     homePage.classList.remove('hidden');
     syaratPage.classList.add('hidden');
     selectionPage.classList.add('hidden');
   }
   
-  function goToSelection() {
+  function showSyarat() {
+    homePage.classList.add('hidden');
+    syaratPage.classList.remove('hidden');
+    selectionPage.classList.add('hidden');
+  }
+  
+  function showSelection() {
     homePage.classList.add('hidden');
     syaratPage.classList.add('hidden');
     selectionPage.classList.remove('hidden');
   }
   
+  // ========== PASANG EVENT TOMBOL ==========
+  if(goToSyaratBtn) {
+    goToSyaratBtn.onclick = function(e) {
+      e.preventDefault();
+      console.log("Tombol LANJUTKAN PENDAFTARAN diklik");
+      showSyarat();
+    };
+  }
+  
+  if(backToHomeFromSyarat) {
+    backToHomeFromSyarat.onclick = function(e) {
+      e.preventDefault();
+      showHome();
+    };
+  }
+  
+  if(backToHomeBtn) {
+    backToHomeBtn.onclick = function(e) {
+      e.preventDefault();
+      showHome();
+    };
+  }
+  
   // ========== CEK CHECKBOX UNTUK ENABLE VERIFIKASI ==========
   function checkVerifikasi() {
-    const tiktokValue = tiktokInput.value.trim();
+    const tiktokValue = tiktokInput ? tiktokInput.value.trim() : "";
     const isTiktokFilled = tiktokValue !== "";
-    const isNamaChecked = checkNama.checked;
-    const isPostingChecked = checkPosting.checked;
+    const isNamaChecked = checkNama ? checkNama.checked : false;
+    const isPostingChecked = checkPosting ? checkPosting.checked : false;
     
-    if (isTiktokFilled && isNamaChecked && isPostingChecked) {
-      verifikasiBtn.disabled = false;
-    } else {
-      verifikasiBtn.disabled = true;
+    if (verifikasiBtn) {
+      if (isTiktokFilled && isNamaChecked && isPostingChecked) {
+        verifikasiBtn.disabled = false;
+      } else {
+        verifikasiBtn.disabled = true;
+      }
     }
   }
   
-  tiktokInput.addEventListener('input', checkVerifikasi);
-  checkNama.addEventListener('change', checkVerifikasi);
-  checkPosting.addEventListener('change', checkVerifikasi);
+  if(tiktokInput) tiktokInput.addEventListener('input', checkVerifikasi);
+  if(checkNama) checkNama.addEventListener('change', checkVerifikasi);
+  if(checkPosting) checkPosting.addEventListener('change', checkVerifikasi);
   
   // ========== VERIFIKASI DAN LANJUT ==========
-  verifikasiBtn.onclick = function() {
-    tiktokUsername = tiktokInput.value.trim();
-    if (tiktokUsername === "") {
-      alert("Masukkan username TikTok kamu!");
-      return;
-    }
-    
-    // Simpan username TikTok ke form akhir
-    if (tiktokFinal) {
-      tiktokFinal.value = tiktokUsername;
-    }
-    
-    alert("✅ Verifikasi berhasil! Silakan lanjutkan pendaftaran.\n\nAdmin akan mengecek username TikTok: " + tiktokUsername);
-    goToSelection();
-  };
-  
-  // ========== EVENT NAVIGASI ==========
-  if(goToSyaratBtn) goToSyaratBtn.addEventListener('click', goToSyarat);
-  if(backToHomeFromSyarat) backToHomeFromSyarat.addEventListener('click', goToHome);
-  if(backToHomeBtn) backToHomeBtn.addEventListener('click', goToHome);
+  if(verifikasiBtn) {
+    verifikasiBtn.onclick = function() {
+      if(tiktokInput) tiktokUsername = tiktokInput.value.trim();
+      if (tiktokUsername === "") {
+        alert("Masukkan username TikTok kamu!");
+        return;
+      }
+      
+      if (tiktokFinal) tiktokFinal.value = tiktokUsername;
+      
+      alert("✅ Verifikasi berhasil! Silakan lanjutkan pendaftaran.\n\nAdmin akan mengecek username TikTok: " + tiktokUsername);
+      showSelection();
+    };
+  }
   
   // ========== AUDIO ==========
   const bgAudio = document.getElementById('bgAudio');
@@ -716,7 +724,4 @@
     const msg = `🔥 MAE SELECTION 🔥\n\n👤 Nama: ${data.nama}\n🎂 Umur: ${data.umur}\n🏯 Marga Sebelum MAE: ${data.margaAsal}\n🔗 Double Marga: ${data.doubleStatus}\n🌍 Asal: ${data.asal}\n📜 Alasan: ${data.alasan}\n📱 TikTok: ${data.tiktok}`;
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
     try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-   
+    
