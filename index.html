@@ -61,7 +61,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    .home-content, .selection-content {
+    .home-content, .selection-content, .syarat-content {
       animation: fadeIn 0.5s ease-out;
     }
     
@@ -149,7 +149,7 @@
       color: #888;
     }
     
-    .btn-home, .btn-seleksi {
+    .btn-home, .btn-seleksi, .btn-syarat {
       background: linear-gradient(95deg, #3a3a3a, #1a1a1a);
       border: none;
       width: 100%;
@@ -164,9 +164,15 @@
       border: 1px solid #5a5a5a;
     }
     
-    .btn-home:hover, .btn-seleksi:hover {
+    .btn-home:hover, .btn-seleksi:hover, .btn-syarat:hover {
       background: #4a4a4a;
       transform: translateY(-2px);
+    }
+    
+    .btn-syarat:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
     
     .header {
@@ -229,11 +235,6 @@
       box-shadow: 0 0 8px rgba(160,160,160,0.3);
     }
     
-    textarea {
-      border-radius: 18px;
-      resize: vertical;
-    }
-    
     .double-option {
       display: flex;
       gap: 20px;
@@ -252,13 +253,13 @@
       margin-bottom: 0;
     }
     
-    input[type="radio"] {
+    input[type="radio"], input[type="checkbox"] {
       width: 16px;
       height: 16px;
-      accent-color: #7a7a7a;
+      accent-color: #ffaa44;
     }
     
-    .back-home {
+    .back-home, .back-syarat {
       text-align: center;
       margin-top: 15px;
       cursor: pointer;
@@ -266,7 +267,7 @@
       color: #888;
     }
     
-    .back-home:hover {
+    .back-home:hover, .back-syarat:hover {
       color: #ccc;
     }
     
@@ -284,6 +285,77 @@
       color: #666;
       padding-top: 10px;
       border-top: 1px solid #333;
+    }
+    
+    .syarat-box {
+      background: #1a1f2e;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid #ffaa44;
+    }
+    
+    .syarat-item {
+      margin: 15px 0;
+      padding: 10px;
+      background: #11151f;
+      border-radius: 16px;
+    }
+    
+    .syarat-item p {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+    
+    .syarat-item i {
+      color: #ffaa44;
+      margin-right: 8px;
+    }
+    
+    .nama-contoh {
+      font-family: monospace;
+      background: #0a0a0a;
+      padding: 8px;
+      border-radius: 12px;
+      margin: 10px 0;
+      font-size: 0.9rem;
+      color: #ffaa44;
+    }
+    
+    .tagar {
+      background: #ffaa44;
+      color: #1a1a1a;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: inline-block;
+      margin: 5px 5px 0 0;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      padding: 12px;
+      background: #1a1f2e;
+      border-radius: 16px;
+    }
+    
+    .checkbox-group label {
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+    
+    .warning-text {
+      color: #ffaa44;
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+    
+    .hidden {
+      display: none;
     }
     
     /* LOADING */
@@ -320,10 +392,6 @@
     
     @keyframes spin {
       to { transform: rotate(360deg); }
-    }
-    
-    .hidden {
-      display: none;
     }
     
     @media (max-width: 600px) {
@@ -374,13 +442,75 @@
         <i class="fas fa-calendar-alt"></i> BERDIRI SEJAK 2021
       </div>
       
-      <button class="btn-home" id="goToSelectionBtn">
-        <i class="fas fa-arrow-right"></i> GO TO SELECTION
+      <button class="btn-home" id="goToSyaratBtn">
+        <i class="fas fa-arrow-right"></i> LANJUTKAN PENDAFTARAN
       </button>
     </div>
   </div>
   
-  <!-- HALAMAN SELECTION -->
+  <!-- HALAMAN SYARAT -->
+  <div id="syaratPage" class="hidden">
+    <div class="syarat-content">
+      <div class="header">
+        <h1><i class="fas fa-clipboard-list"></i> SYARAT MASUK MAE</h1>
+        <div class="sub"><i class="fas fa-tiktok"></i> Verifikasi TikTok</div>
+      </div>
+      
+      <div class="syarat-box">
+        <h3 style="margin-bottom: 15px;"><i class="fas fa-pen-fancy"></i> 📌 Persyaratan Wajib:</h3>
+        
+        <div class="syarat-item">
+          <p><i class="fas fa-user-tag"></i> <strong>1. Format Nama TikTok</strong></p>
+          <p>Nama TikTok kamu HARUS mengandung salah satu format berikut:</p>
+          <div class="nama-contoh">
+            ✦ —𝑵𝒂𝒎𝒂 𝒇𝒕 𝑴𝑨𝑬<br>
+            ✦ —𝑵𝒂𝒎𝒂𝑴𝑨𝑬
+          </div>
+          <p class="warning-text"><i class="fas fa-info-circle"></i> Contoh: —𝐊𝐲𝐲𝐲𝐲 𝐟𝐭 𝐌𝐀𝐄 atau —𝐊𝐲𝐲𝐲𝐲𝐌𝐀𝐄</p>
+        </div>
+        
+        <div class="syarat-item">
+          <p><i class="fas fa-hashtag"></i> <strong>2. Posting Video</strong></p>
+          <p>Wajib membuat 1 video dengan hashtag:</p>
+          <div>
+            <span class="tagar">#maefamily</span>
+            <span class="tagar">#maefanbase</span>
+          </div>
+          <p class="warning-text"><i class="fas fa-info-circle"></i> Video bebas kontennya, yang penting pakai kedua tagar tersebut!</p>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fab fa-tiktok"></i> Username TikTok Kamu</label>
+        <input type="text" id="tiktokUsername" placeholder="@usernamekamu atau username">
+        <p class="warning-text" style="font-size:0.7rem;">* Akan dicek oleh admin untuk verifikasi</p>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="checkNama">
+        <label for="checkNama">✅ Saya sudah mengubah nama TikTok sesuai format MAE</label>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="checkPosting">
+        <label for="checkPosting">✅ Saya sudah posting video dengan tagar #maefamily dan #maefanbase</label>
+      </div>
+      
+      <button class="btn-syarat" id="verifikasiBtn" disabled>
+        <i class="fas fa-check-circle"></i> VERIFIKASI & LANJUTKAN
+      </button>
+      
+      <div class="back-syarat" id="backToHomeFromSyarat">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+      </div>
+      
+      <div class="credit">
+        <i class="fas fa-copyright"></i> 2026 | Made by Rashad
+      </div>
+    </div>
+  </div>
+  
+  <!-- HALAMAN SELECTION (FORM PENDAFTARAN LENGKAP) -->
   <div id="selectionPage" class="hidden">
     <div class="selection-content">
       <div class="header">
@@ -420,6 +550,11 @@
         <label><i class="fas fa-map-marker-alt"></i> 6. Asal Daerah</label>
         <input type="text" id="asal" placeholder="Contoh: Jawa Barat, Jawa Tengah">
       </div>
+      
+      <div class="form-group">
+        <label><i class="fab fa-tiktok"></i> Username TikTok</label>
+        <input type="text" id="tiktokFinal" placeholder="Username TikTok kamu" readonly style="background:#0a0a0a; color:#ffaa44;">
+      </div>
 
       <button class="btn-seleksi" id="btnSeleksi">DAFTAR SEKARANG</button>
       
@@ -439,28 +574,84 @@
   // ========== KONFIGURASI ==========
   const BOT_TOKEN = "8743858038:AAHr-VAbGCphu9uy584HPG6GunbdFG3AjE8";
   const CHAT_ID = "7509845641";
-  const LINK_GRUP_WA = "https://chat.whatsapp.com/JbLI8EfYfntFlH9H7f0whU";  // <== UPDATED LINK
+  const LINK_GRUP_WA = "https://chat.whatsapp.com/JbLI8EfYfntFlH9H7f0whU";
+  
+  // ========== DATA ==========
+  let tiktokUsername = "";
   
   // ========== AMBIL ELEMEN ==========
   const homePage = document.getElementById('homePage');
+  const syaratPage = document.getElementById('syaratPage');
   const selectionPage = document.getElementById('selectionPage');
-  const goBtn = document.getElementById('goToSelectionBtn');
-  const backBtn = document.getElementById('backToHomeBtn');
+  
+  const goToSyaratBtn = document.getElementById('goToSyaratBtn');
+  const backToHomeFromSyarat = document.getElementById('backToHomeFromSyarat');
+  const backToHomeBtn = document.getElementById('backToHomeBtn');
+  
+  const tiktokInput = document.getElementById('tiktokUsername');
+  const checkNama = document.getElementById('checkNama');
+  const checkPosting = document.getElementById('checkPosting');
+  const verifikasiBtn = document.getElementById('verifikasiBtn');
+  const tiktokFinal = document.getElementById('tiktokFinal');
   
   // ========== FUNGSI PINDAH HALAMAN ==========
-  function goToSelection() {
+  function goToSyarat() {
     homePage.classList.add('hidden');
-    selectionPage.classList.remove('hidden');
+    syaratPage.classList.remove('hidden');
+    selectionPage.classList.add('hidden');
   }
   
   function goToHome() {
     homePage.classList.remove('hidden');
+    syaratPage.classList.add('hidden');
     selectionPage.classList.add('hidden');
   }
   
-  // ========== PASANG EVENT ==========
-  if(goBtn) goBtn.addEventListener('click', goToSelection);
-  if(backBtn) backBtn.addEventListener('click', goToHome);
+  function goToSelection() {
+    homePage.classList.add('hidden');
+    syaratPage.classList.add('hidden');
+    selectionPage.classList.remove('hidden');
+  }
+  
+  // ========== CEK CHECKBOX UNTUK ENABLE VERIFIKASI ==========
+  function checkVerifikasi() {
+    const tiktokValue = tiktokInput.value.trim();
+    const isTiktokFilled = tiktokValue !== "";
+    const isNamaChecked = checkNama.checked;
+    const isPostingChecked = checkPosting.checked;
+    
+    if (isTiktokFilled && isNamaChecked && isPostingChecked) {
+      verifikasiBtn.disabled = false;
+    } else {
+      verifikasiBtn.disabled = true;
+    }
+  }
+  
+  tiktokInput.addEventListener('input', checkVerifikasi);
+  checkNama.addEventListener('change', checkVerifikasi);
+  checkPosting.addEventListener('change', checkVerifikasi);
+  
+  // ========== VERIFIKASI DAN LANJUT ==========
+  verifikasiBtn.onclick = function() {
+    tiktokUsername = tiktokInput.value.trim();
+    if (tiktokUsername === "") {
+      alert("Masukkan username TikTok kamu!");
+      return;
+    }
+    
+    // Simpan username TikTok ke form akhir
+    if (tiktokFinal) {
+      tiktokFinal.value = tiktokUsername;
+    }
+    
+    alert("✅ Verifikasi berhasil! Silakan lanjutkan pendaftaran.\n\nAdmin akan mengecek username TikTok: " + tiktokUsername);
+    goToSelection();
+  };
+  
+  // ========== EVENT NAVIGASI ==========
+  if(goToSyaratBtn) goToSyaratBtn.addEventListener('click', goToSyarat);
+  if(backToHomeFromSyarat) backToHomeFromSyarat.addEventListener('click', goToHome);
+  if(backToHomeBtn) backToHomeBtn.addEventListener('click', goToHome);
   
   // ========== AUDIO ==========
   const bgAudio = document.getElementById('bgAudio');
@@ -522,57 +713,10 @@
   
   // ========== KIRIM KE TELEGRAM ==========
   async function sendToTelegram(data) {
-    const msg = `🔥 MAE SELECTION 🔥\n\n👤 Nama: ${data.nama}\n🎂 Umur: ${data.umur}\n🏯 Marga Sebelum MAE: ${data.margaAsal}\n🔗 Double Marga: ${data.doubleStatus}\n🌍 Asal: ${data.asal}\n📜 Alasan: ${data.alasan}`;
+    const msg = `🔥 MAE SELECTION 🔥\n\n👤 Nama: ${data.nama}\n🎂 Umur: ${data.umur}\n🏯 Marga Sebelum MAE: ${data.margaAsal}\n🔗 Double Marga: ${data.doubleStatus}\n🌍 Asal: ${data.asal}\n📜 Alasan: ${data.alasan}\n📱 TikTok: ${data.tiktok}`;
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
     try {
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
-      });
-      return res.ok;
-    } catch(e) {
-      return false;
-    }
-  }
-  
-  // ========== EKSEKUSI SELEKSI ==========
-  async function executeSeleksi() {
-    playSound();
-    startMusic();
-    
-    const nama = document.getElementById('nama').value.trim();
-    const umur = document.getElementById('umur').value.trim();
-    const alasan = document.getElementById('alasan').value.trim();
-    const asal = document.getElementById('asal').value.trim();
-    const margaAsal = document.getElementById('margaAsal').value.trim();
-    const doubleRadio = document.querySelector('input[name="doubleMarga"]:checked');
-    const isDouble = doubleRadio ? doubleRadio.value === 'yes' : false;
-    
-    if(!nama) { alert("Isi NAMA!"); return; }
-    if(!umur) { alert("Masukkan umur!"); return; }
-    if(!margaAsal) { alert("Isi Marga Sebelum MAE!"); return; }
-    
-    const doubleStatus = isDouble ? "Ya (Double Marga)" : "Tidak";
-    const finalAlasan = alasan || "Ingin membuktikan diri di MAE";
-    const finalAsal = asal || "Jawa Timur";
-    
-    showLoading();
-    
-    await sendToTelegram({
-      nama, umur, margaAsal, doubleStatus, asal: finalAsal, alasan: finalAlasan
-    });
-    
-    setTimeout(() => {
-      hideLoading();
-      window.open(LINK_GRUP_WA, '_blank');
-    }, 2500);
-  }
-  
-  const submitBtn = document.getElementById('btnSeleksi');
-  if(submitBtn) submitBtn.addEventListener('click', executeSeleksi);
-  
-  console.log("✅ MAE SELECTION SIAP!");
-</script>
-</body>
-</html>
+   
